@@ -103,12 +103,10 @@ header .links{
 /* design do botao verde */
 .botaoVerde{
     background-color: #157C5D;
-    display: flex;
-    justify-content: center;
     border-radius: 20px;
     padding: 5px 50px;
     align-self: center;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 
 /* texto do botao verde */
@@ -119,8 +117,11 @@ header .links{
     color: #F8FFFD;
     background-color: transparent;
     border: none;
-    
+    margin-top: 5px; 
+  
 }
+
+
 
 /* design do botao animado inteiro */
 .botoes .botaoAnimado{
@@ -129,7 +130,7 @@ header .links{
     align-items: center;
     background-color:#22586A;
     border-radius: 20px;
-    padding: 7px 20px;
+    padding: 7px;
     gap: 5px;
 }
 
@@ -157,11 +158,9 @@ header .links{
 
 /* design do texto principal do hero */
 .hero .textbox{
-    display: inline-flex;
-    align-items: flex-start;
+    display:flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1px;
+    margin-top: 10%;
     
 }
 
@@ -174,7 +173,7 @@ header .links{
 /* design do hero inteiro */
 .hero .container{
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
     gap: 80px;
 }
 
@@ -197,4 +196,24 @@ input{
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.principal h2{
+    font-family: 'Jomhuria', cursive;
+    color:#063E51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    font-weight: lighter;
+    margin-top: 80px;
+}
+.principal p{
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
 }
