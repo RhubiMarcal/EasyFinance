@@ -1,0 +1,200 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-azul-escuro: #063E51;
+    --color-azul-claro: #22586A;
+    --color-cinza-claro: #C1C1C1;
+    --color-branco-escuro: #F8FFFD;
+    --color-verde-claro: #AFCAC2;
+    --color-verde-escuro: #157C5D;
+}
+
+
+.container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* design do header */
+header{
+    background-color: #063E51;
+    padding: 15px;
+}
+
+/* espacamento do header */
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* texto do titulo do header */
+header h3{
+    color:#F8FFFD;
+    font-family: 'Jomhuria', cursive;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 48px;
+    font-weight: lighter;
+}
+    
+/* texto dos links do header     */
+header a{
+    text-decoration: none;
+    color: #F8FFFD;
+    font-family: 'Jomhuria', cursive;
+    font-weight: lighter;
+    font-size: 32px;
+}
+
+/* espacamento dos links do header */
+header .links{
+    display: flex;
+    gap: 120px;
+}
+
+
+/* design do box inteiro */
+.hero .box{
+    background-color: #AFCAC2;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 70px 60px;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* texto do titulo do hero */
+.hero h1{
+    font-size: 96px;
+    font-family: 'Jomhuria', cursive;
+    font-weight: lighter;
+    color: #F8FFFD;
+}
+
+/* texto do titulo (login) do box do hero */
+.hero h3{
+    color:#063E51;
+    display: flex;
+    justify-content: center;
+    font: weight 20px;
+    font-size: 28px;
+    margin-bottom: 10px;
+    
+}
+
+/* texto do paragrado do hero */
+.hero p{
+    color: #F8FFFD;
+    font-size: 20px;
+}
+
+/* design do botao verde */
+.botaoVerde{
+    background-color: #157C5D;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5px 50px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+/* texto do botao verde */
+.botaoVerde button{ 
+    font-family: 'Jomhuria', cursive;
+    font-weight: lighter;
+    font-size: 28px;
+    color: #F8FFFD;
+    background-color: transparent;
+    border: none;
+    
+}
+
+/* design do botao animado inteiro */
+.botoes .botaoAnimado{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:#22586A;
+    border-radius: 20px;
+    padding: 7px 20px;
+    gap: 5px;
+}
+
+/* design do botao animado login */
+.botoes .botaoAnimado .login{
+    background-color: #063E51;
+    border-radius: 16px;
+    color: #F8FFFD;
+    display: flex;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 5px 60px;
+}
+
+/* design do botao animado cadastro */
+.botoes .botaoAnimado .Cadastro{
+    /* background-color:#063E51; */
+    /* border-radius: 16px; */
+    color: #F8FFFD;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 5px 60px;
+}
+
+/* design do texto principal do hero */
+.hero .textbox{
+    display: inline-flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    
+}
+
+/* imagem de fundo do hero */
+.hero{
+    background-image: url('./img/informações.png');
+    padding: 78px;
+
+}
+/* design do hero inteiro */
+.hero .container{
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Jomhuria', cursive;
+    font-size: 28px;
+    color: #063E51;
+}
+input{
+    background-color: #F8FFFD;
+    border:none;
+    padding: 10px;
+    border-radius: 20px;
+    width: 340px;
+}
+
+.hero .resposta{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
