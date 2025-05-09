@@ -103,12 +103,10 @@ header .links{
 /* design do botao verde */
 .botaoVerde{
     background-color: #157C5D;
-    display: flex;
-    justify-content: center;
     border-radius: 20px;
     padding: 5px 50px;
     align-self: center;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 
 /* texto do botao verde */
@@ -119,7 +117,7 @@ header .links{
     color: #F8FFFD;
     background-color: transparent;
     border: none;
-    
+    margin-top: 5px;
 }
 
 /* design do botao animado inteiro */
@@ -129,7 +127,7 @@ header .links{
     align-items: center;
     background-color:#22586A;
     border-radius: 20px;
-    padding: 7px 20px;
+    padding: 7px;
     gap: 5px;
 }
 
@@ -152,34 +150,32 @@ header .links{
     display: flex;
     justify-content: flex-end;
     align-self: center;
-    padding: 5px 60px;
+    padding: 0 60px;
 }
 
 /* design do texto principal do hero */
 .hero .textbox{
-    display: inline-flex;
-    align-items: flex-start;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1px;
-    
+    margin-top: 80px;
+    margin-right: 40px;
 }
 
 /* imagem de fundo do hero */
 .hero{
     background-image: url('./img/informações.png');
-    padding: 78px;
+    
 
 }
 /* design do hero inteiro */
 .hero .container{
     display: flex;
-    flex-direction: row;
-    gap: 80px;
+    padding: 50px 10px;
+
 }
 
 label {
-    display: block;
+    display: flex;
     margin-bottom: 8px;
     font-family: 'Jomhuria', cursive;
     font-size: 28px;
@@ -198,3 +194,191 @@ input{
     flex-direction: column;
     gap: 20px;
 }
+
+.principal h2{
+    font-family: 'Jomhuria', cursive;
+    color:#063E51;
+    display: flex;
+    align-items: flex-end;
+    font-size: 64px;
+    font-weight: lighter;
+    
+}
+.principal p{
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.funcionalidades h2{
+    font-family: 'Jomhuria', cursive;
+    color:#063E51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    font-weight: lighter;
+    margin: 30px 0;
+    
+} 
+.principal .textbox{
+    margin-top:100px
+}
+
+.principal .textbox .juntos{
+    display:flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.funcionalidades h3{
+    font-family: 'Jomhuria', cursive;
+    color:#063E51;
+    display: flex;
+    font-size: 36px;
+    font-weight: lighter;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+
+.funcionalidades .container .caixas{
+    background-image: url('./img/funcionalidades6.png');
+    background-repeat: no-repeat;
+    background-position:top;
+    margin-bottom: 50px;
+}
+
+.funcionalidades .caixas{
+    padding: 72px 0;
+    display: flex;
+}
+
+.funcionalidades .caixas .gastos{
+    padding-left: 87px;
+    padding-right: 38px;
+    text-align: center;
+}
+
+.funcionalidades .caixas .limites{
+    padding-left: 81px;
+    padding-right: 31px;    
+    text-align: center;
+}
+
+.funcionalidades .caixas .graficos{
+    padding-left: 93px;
+    padding-right: 43px;    
+    text-align: center;
+}
+
+.funcionalidades .caixas .metas{
+    padding-left: 102px;
+    padding-right: 53px;    
+    text-align: center;
+}
+
+.Gastos{
+    background-color: #AFCAC2;
+    
+} 
+
+.Graficos{
+    background-color: #AFCAC2;
+}
+
+.tituloFuncionalidade{
+    font-family: 'Jomhuria', cursive;
+    font-size: 48px;
+    font-weight: lighter;
+    color: #063E51;
+    margin: 40px 0 8px;
+}
+
+.paragrafo1{
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    text-align:right;
+    align-items: center;
+    margin-bottom: 50px;
+    margin: 0 0 20px;
+}
+
+
+.paragrafo2{
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 50px;
+    margin: 0 0 20px;
+}
+
+.funcao .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+.Gastos .container{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 40px 0;
+}
+.Graficos .container{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 40px 0;
+}
+
+.comecar button{
+    border:none;
+    border-radius: 40px;
+    background-color: #157C5D;
+    color: #F8FFFD;
+    padding:  10px 60px;
+    font-size: 40px;
+    font-family: 'Jomhuria', cursive;
+    
+}
+.comecar .container {
+    color: #157C5D;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    align-items: center;
+}
+.comecar{
+    background-color: #C1C1C1;
+}
+
+footer{
+    background-color: #063E51;
+}
+footer div{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 15px 0;
+
+}
+
+footer h3{
+    color: #F8FFFD;
+    font-size: 32px;
+}
+
+footer h4{
+    color: #F8FFFD;
+    font-size: 24px;
+}
+
