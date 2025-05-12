@@ -28,8 +28,14 @@ body {
 header{
     background-color: #063E51;
     padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
-
+html{
+    scroll-behavior: smooth;
+    
+}
 /* espacamento do header */
 header .container {
     display: flex;
@@ -54,8 +60,12 @@ header a{
     font-family: 'Jomhuria', cursive;
     font-weight: lighter;
     font-size: 32px;
+    transition: all .3s;
 }
-
+header a:hover{
+    transform: scale(1.1);
+    transition: all .3s;
+}
 /* espacamento dos links do header */
 header .links{
     display: flex;
@@ -189,6 +199,10 @@ input{
     width: 340px;
 }
 
+.requerimento input {
+    outline: none;
+}
+
 .hero .resposta{
     display: flex;
     flex-direction: column;
@@ -229,7 +243,7 @@ input{
     margin-top:100px
 }
 
-.principal .textbox .juntos{
+.juntos{
     display:flex;
     justify-content: center;
     gap: 20px;
@@ -243,6 +257,8 @@ input{
     gap: 60px;
 }
 
+
+
 .caixa{
     padding: 100px 24px;
     background-color: var(--color-verde-claro);
@@ -252,6 +268,12 @@ input{
     text-align: center;
     display: flex;
     align-items: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.caixas div:hover{
+    transform: scale(1.2);
+    transition: all 0.3s;
 }
 
 .funcionalidades h3{
@@ -276,6 +298,16 @@ input{
     font-weight: lighter;
     color: #063E51;
     margin: 40px 0 8px;
+    text-align: right;
+}
+
+.tituloFuncionalidade2{
+    font-family: 'Jomhuria', cursive;
+    font-size: 48px;
+    font-weight: lighter;
+    color: #063E51;
+    margin: 40px 0 8px;
+    text-align: left;
 }
 
 .paragrafo1{
