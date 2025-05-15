@@ -78,8 +78,8 @@ header .links{
     background-color: #AFCAC2;
     flex-direction: column;
     border-radius: 20px;
-    padding: 70px 60px;
-    gap: 30px;
+    padding: 50px 40px;
+    gap: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +94,7 @@ header .links{
 }
 
 /* texto do titulo (login) do box do hero */
-.hero h3{
+.hero .box h3{
     color:#063E51;
     display: flex;
     justify-content: center;
@@ -110,13 +110,32 @@ header .links{
     font-size: 20px;
 }
 
+/* imagem de fundo do hero */
+.hero{
+    background-image: url('./img/informações.png');
+    
+
+}
+/* design do hero inteiro */
+.hero .container{
+    display: flex;
+    padding: 50px 10px;
+    gap: 40px; 
+}
+
 /* design do botao verde */
 .botaoVerde{
     background-color: #157C5D;
     border-radius: 20px;
     padding: 5px 50px;
     align-self: center;
-    margin-top: 100px;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+.botaoVerde:hover{
+    transform: scale(1.1);
+    transition: all 0.3s;
+    cursor: pointer;
 }
 
 /* texto do botao verde */
@@ -139,29 +158,48 @@ header .links{
     border-radius: 20px;
     padding: 7px;
     gap: 5px;
+    position: relative;
 }
 
 /* design do botao animado login */
-.botoes .botaoAnimado .login{
-    background-color: #063E51;
-    border-radius: 16px;
+.botoes .botaoAnimado .botao{
+
     color: #F8FFFD;
     display: flex;
     justify-content: center;
     align-self: flex-start;
     padding: 5px 60px;
+    z-index: 1;
+    cursor: pointer;
 }
 
-/* design do botao animado cadastro */
-.botoes .botaoAnimado .Cadastro{
-    /* background-color:#063E51; */
-    /* border-radius: 16px; */
-    color: #F8FFFD;
-    display: flex;
-    justify-content: flex-end;
-    align-self: center;
-    padding: 0 60px;
+.slider {
+    background-color: #063E51;
+    border-radius: 16px;
+    width: calc((100% - 14px) / 2);
+    height: calc(100% - 14px);
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    transform: translateX(0%);
 }
+
+@keyframes sliderDireita {
+    from{transform: translateX(0%);}
+    to{transform: translateX(100%)}
+}
+@keyframes sliderEsquerda {
+    from{transform: translateX(100%);}
+    to{transform: translateX(0%)}
+
+}
+.slider.Direita{
+    animation: sliderDireita 0.5s forwards;
+}
+.slider.Esquerda{
+    animation: sliderEsquerda 0.5s forwards;
+}
+
 
 /* design do texto principal do hero */
 .hero .textbox{
@@ -171,18 +209,6 @@ header .links{
     margin-right: 40px;
 }
 
-/* imagem de fundo do hero */
-.hero{
-    background-image: url('./img/informações.png');
-    
-
-}
-/* design do hero inteiro */
-.hero .container{
-    display: flex;
-    padding: 50px 10px;
-
-}
 
 label {
     display: flex;
@@ -204,10 +230,16 @@ input{
 }
 
 .hero .resposta{
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 20px;
 }
+
+.hero .resposta.active{
+    display: flex;
+    
+}
+
 
 .principal h2{
     font-family: 'Jomhuria', cursive;
@@ -238,9 +270,10 @@ input{
     font-weight: lighter;
     margin: 30px 0;
     
-} 
-.principal .textbox{
-    margin-top:100px
+}
+
+.principal {
+    padding-top: 70px;
 }
 
 .juntos{
@@ -276,6 +309,10 @@ input{
     transition: all 0.3s;
 }
 
+.funcionalidades {
+    padding-top: 50px;
+}
+
 .funcionalidades h3{
     font-family: 'Jomhuria', cursive;
     color:#063E51;
@@ -283,71 +320,50 @@ input{
     font-weight: lighter;
 }
 
-.Gastos{
-    background-color: #AFCAC2;
+.section .container{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 40px 0;
+    justify-content: space-between;
+    align-items: center;
     
-} 
-
-.Graficos{
-    background-color: #AFCAC2;
 }
-
-.tituloFuncionalidade{
+.section .container .title{
     font-family: 'Jomhuria', cursive;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: lighter;
     color: #063E51;
     margin: 40px 0 8px;
     text-align: right;
 }
-
-.tituloFuncionalidade2{
-    font-family: 'Jomhuria', cursive;
-    font-size: 48px;
-    font-weight: lighter;
-    color: #063E51;
-    margin: 40px 0 8px;
-    text-align: left;
-}
-
-.paragrafo1{
+.section .container .paragrafo{
     color: black;
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
-    text-align:right;
+    text-align: justify;
     align-items: center;
     margin-bottom: 50px;
     margin: 0 0 20px;
+    line-height: 22px;
+}
+.section .container .textbox {
+    max-width: 55%;
+}
+.section .container .imagem{
+    max-width: 35%;
 }
 
+.section:nth-child(2n) {
+    background-color: #AFCAC2;
+}
 
-.paragrafo2{
-    color: black;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.section:nth-child(2n) .container{
+    flex-direction: row;
+}
+
+.section:nth-child(2n) .container .title{
     text-align: left;
-    margin-bottom: 50px;
-    margin: 0 0 20px;
-}
-
-.funcao .container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 60px;
-}
-.Gastos .container{
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 40px 0;
-}
-.Graficos .container{
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 40px 0;
 }
 
 .comecar button{
@@ -355,11 +371,17 @@ input{
     border-radius: 40px;
     background-color: #157C5D;
     color: #F8FFFD;
-    padding:  10px 60px;
-    font-size: 40px;
+    padding:  5px 40px;
+    font-size: 30px;
     font-family: 'Jomhuria', cursive;
-    
+    transition: all 0.3s;
 }
+.comecar button:hover{
+    transform: scale(1.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
 .comecar .container {
     color: #157C5D;
     display: flex;
@@ -384,11 +406,11 @@ footer div{
 
 footer h3{
     color: #F8FFFD;
-    font-size: 32px;
+    font-size: 24px;
 }
 
 footer h4{
     color: #F8FFFD;
-    font-size: 24px;
+    font-size: 16px;
 }
 

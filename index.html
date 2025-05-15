@@ -22,172 +22,193 @@
             </nav>
         </div>
     </header>
-    <section class="hero" id="hero">
-        <div class="container">
-            <div class="textbox">
-                <div  class="title">
-                    <h1>
-                        EasyFinance
-                    </h1>
+    
+    <main>
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="textbox">
+                    <div  class="title">
+                        <h1>
+                            EasyFinance
+                        </h1>
+                    </div>
+                    <div  class="texto">
+                        <p>
+                            Plataforma ideal para gerenciar suas finanças de forma simples e eficiente. Organize seu orçamento, acompanhe seus gastos e tome decisões financeiras mais assertivas com facilidade e segurança.
+                        </p>
+                    </div>
+                    
                 </div>
-                <div  class="texto">
+                <div class="box">
+                    <h3 class="titleForm">
+                        LOGIN
+                    </h3>
+                    <form id="login" class="resposta active">
+                        <div class="requerimento">
+                            <label for="email">Email:</label>
+                            <input name=email" id="email" type="Email" required>
+                        </div>
+                        <div class="requerimento">
+                            <label for="senha">Senha:</label>
+                            <input name="senha" id="senha" type="Senha" required>
+                        </div>
+                        <div class="botaoVerde">
+                            <button type="submit">ENTRAR</button>
+                        </div>
+                    </form>
+                    <form id="cadastro" class="resposta ">
+                        <div class="requerimento">
+                            <label for="usuario">Usuário:</label>
+                            <input name="usuario" id="usuario" type="text" required>
+                        </div>
+                        <div class="requerimento">
+                            <label for="email">Email:</label>
+                            <input name=email" id="email" type="email" required>
+                        </div>
+                        <div class="requerimento">
+                            <label for="senha">Senha:</label>
+                            <input name="senha" id="senha" type="password" required>
+                        </div>
+                        
+                        <div class="botaoVerde">
+                            <button type="submit">ENTRAR</button>
+                        </div>
+                    </form>
+                    <div class="botoes">
+                        <div class="botaoAnimado">
+                            <div class="botao" onclick="toLogin()">
+                                Login
+                            </div>
+                            <div class="botao" onclick="toCadastro()">
+                                Cadastro
+                            </div>
+                            <div class="slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="principal" id="principal">
+            <div class="container">
+                <div class="textbox">
+                    <div class="juntos">
+                        <img class="caixinha" src="./img/freepik--speech-bubble--inject-2.svg" alt=caixa/dinheiro">
+                        <h2>
+                            Organize sua vida financeira com o EasyFinance
+                        </h2>
+                    </div>
                     <p>
-                        Plataforma ideal para gerenciar suas finanças de forma simples e eficiente. Organize seu orçamento, acompanhe seus gastos e tome decisões financeiras mais assertivas com facilidade e segurança.
+                    O EasyFinance é uma plataforma prática e intuitiva para quem quer ter controle total sobre suas finanças. Com ele, você registra despesas e receitas, define orçamentos mensais, acompanha metas de economia e analisa seus hábitos por meio de relatórios visuais.
+                    Tudo o que você precisa para planejar, economizar e conquistar seus objetivos financeiros — em um só lugar.
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <section class="funcionalidades" id="funcionalidades">
+            <div class="container">
+                <h2>
+                    Funcionalidades Financeiras Essenciais no EasyFinance
+                </h2>
+                <div class="caixas">
+                    <div class="caixa gastos">
+                            <h3>
+                                Gastos e ganhos por categoria
+                            </h3>
+                    </div>
+                    <div class="caixa limites">
+                            <h3>
+                                Limites mensais por orçamento 
+                            </h3>
+                    </div>
+                    <div class="caixa graficos">
+                        <h3>
+                            Gráficos de consumo
+                        </h3>
+                    </div>
+                    <div class="caixa metas">
+                        <h3>
+                            Metas de economia
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="textbox">
+                    <h3 class="title">
+                        Controle de Despesas e Receitas 
+                    </h3>
+                    <p class="paragrafo">
+                        Essa função permite que o usuário registre todo o dinheiro que entra (receitas) e sai (despesas) da sua conta. Cada movimentação pode ser classificada em categorias, como alimentação, transporte, moradia, lazer, entre outras. Isso ajuda a entender para onde o dinheiro está indo e quais são as principais fontes de gasto e de renda.
+                        Ao manter esse registro atualizado, o usuário consegue ter uma visão clara e detalhada da sua situação financeira no dia a dia.
+                    </p>
+                </div>
+                <img class="imagem" src="./img/1.png" alt="imagemIlustrativa">
                 
             </div>
-            <div class="box">
-                <h3>
-                    LOGIN
-                </h3>
-                <form class="resposta">
-                    <div class="requerimento">
-                        <label for="email">Email:</label>
-                        <input name=email" id="email" type="Email" required>
-                    </div>
-                    <div class="requerimento">
-                        <label for="senha">Senha:</label>
-                        <input name="senha" id="senha" type="Senha" required>
-                    </div>
-                    <div class="botaoVerde">
-                        <button type="submit">ENTRAR</button>
-                    </div>
-                </form>
-                <div class="botoes">
-                    <div class="botaoAnimado">
-                        <div class="login">
-                            <a>
-                                Login
-                            </a>
-                        </div>
-                        <div class="Cadastro">
-                            <a>
-                                Cadastro
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="principal" id="principal">
-        <div class="container">
-            <div class="textbox">
-                <div class="juntos">
-                    <img class="caixinha" src="./img/freepik--speech-bubble--inject-2.svg" alt=caixa/dinheiro">
-                <h2>
-                    Organize sua vida financeira com o EasyFinance
-                </h2>
-                </div>
-                <p>
-                O EasyFinance é uma plataforma prática e intuitiva para quem quer ter controle total sobre suas finanças. Com ele, você registra despesas e receitas, define orçamentos mensais, acompanha metas de economia e analisa seus hábitos por meio de relatórios visuais.
-                Tudo o que você precisa para planejar, economizar e conquistar seus objetivos financeiros — em um só lugar.
-                </p>
-            </div>
-        </div>
-    </section>
-    <section class="funcionalidades" id="funcionalidades">
-        <div class="container">
-            <h2>
-                Funcionalidades Financeiras Essenciais no EasyFinance
-            </h2>
-            <div class="caixas">
-                <div class="caixa gastos">
-                        <h3>
-                            Gastos e ganhos por categoria
-                        </h3>
-                </div>
-                <div class="caixa limites">
-                        <h3>
-                            Limites mensais por orçamento 
-                        </h3>
-                </div>
-                <div class="caixa graficos">
-                    <h3>
-                        Gráficos de consumo
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="textbox">
+                    <h3 class="title">
+                        Visualize seus hábitos com relatórios claros
                     </h3>
+                    <p class="paragrafo">
+                        Entender seus gastos e ganhos fica muito mais fácil com os relatórios visuais do EasyFinance. Com gráficos intuitivos e resumos automáticos, você acompanha para onde seu dinheiro está indo e identifica padrões de consumo com rapidez. É uma forma simples e eficiente de tomar decisões mais conscientes e ajustar seus hábitos financeiros.
+                    </p>
                 </div>
-                <div class="caixa metas">
-                    <h3>
-                        Metas de economia
+                <img class="imagem" src="./img/2.png" alt="imagemIlustrativa">
+                
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="textbox">
+                    <h3 class="title">
+                        Alcance seus objetivos com metas financeiras
                     </h3>
+                    <p class="paragrafo">
+                        Com o EasyFinance, você transforma sonhos em planos. Crie metas como fazer uma viagem, comprar algo especial ou montar uma reserva de emergência, e acompanhe sua evolução ao longo do tempo.
+                    </p>
                 </div>
+                <img class="imagem" src="./img/3.png" alt="imagemIlustrativa">
             </div>
-        </div>
-    </section>
-    <section class="Gastos funcao">
-        <div class="container">
-            <div>
-                <h3 class="tituloFuncionalidade">
-                    Controle de Despesas e Receitas 
-                </h3>
-                <p class="paragrafo1">
-                    Essa função permite que o usuário registre todo o dinheiro que entra (receitas) e sai (despesas) da sua conta. Cada movimentação pode ser classificada em categorias, como alimentação, transporte, moradia, lazer, entre outras. Isso ajuda a entender para onde o dinheiro está indo e quais são as principais fontes de gasto e de renda.
-                    Ao manter esse registro atualizado, o usuário consegue ter uma visão clara e detalhada da sua situação financeira no dia a dia.
-                </p>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="textbox">
+                    <h3 class="title">
+                        Mantenha o controle com orçamentos mensais
+                    </h3>
+                    <p class="paragrafo">
+                        Com o EasyFinance, você define limites de gastos por categoria e acompanha o quanto já utilizou ao longo do mês. Assim, fica mais fácil se organizar, evitar excessos e manter o equilíbrio financeiro. A cada novo registro, você vê em tempo real o quanto ainda pode gastar — tudo de forma clara, prática e acessível.
+                    </p>
+                </div>
+                <img class="imagem" src="./img/4.png" alt="imagemIlustrativa">
             </div>
-            <div class="imagem">
-                <img src="./img/1.png" alt="imagemIlustrativa">
+        </section>
+
+        <section class="comecar">
+            <div class="container">
+                <h2>Comece agora!</h2>
+                <button>Entrar</button>
             </div>
-        </div>
-    </section>
-    <section class="Limites funcao">
-        <div class="container">
-            <div>
-                <h3 class="tituloFuncionalidade2">
-                    Visualize seus hábitos com relatórios claros
-                </h3>
-                <p class="paragrafo2">
-                    Entender seus gastos e ganhos fica muito mais fácil com os relatórios visuais do EasyFinance. Com gráficos intuitivos e resumos automáticos, você acompanha para onde seu dinheiro está indo e identifica padrões de consumo com rapidez. É uma forma simples e eficiente de tomar decisões mais conscientes e ajustar seus hábitos financeiros.
-                </p>
-            </div>
-            <div class="imagem">
-                <img src="./img/2.png" alt="imagemIlustrativa">
-            </div>
-        </div>
-    </section>
-    <section class="Graficos funcao">
-        <div class="container">
-            <div>
-                <h3 class="tituloFuncionalidade">
-                    Alcance seus objetivos com metas financeiras
-                </h3>
-                <p class="paragrafo1">
-                    Com o EasyFinance, você transforma sonhos em planos. Crie metas como fazer uma viagem, comprar algo especial ou montar uma reserva de emergência, e acompanhe sua evolução ao longo do tempo.
-                </p>
-            </div>
-            <div class="imagem">
-                <img src="./img/3.png" alt="imagemIlustrativa">
-            </div>
-        </div>
-    </section>
-    <section class="Metas funcao">
-        <div class="container">
-            <div>
-                <h3 class="tituloFuncionalidade2">
-                    Mantenha o controle com orçamentos mensais
-                </h3>
-                <p class="paragrafo2">
-                    Com o EasyFinance, você define limites de gastos por categoria e acompanha o quanto já utilizou ao longo do mês. Assim, fica mais fácil se organizar, evitar excessos e manter o equilíbrio financeiro. A cada novo registro, você vê em tempo real o quanto ainda pode gastar — tudo de forma clara, prática e acessível.
-                </p>
-            </div>
-            <div class="imagem">
-                <img src="./img/4.png" alt="imagemIlustrativa">
-            </div>
-        </div>
-    </section>
-    <section class="comecar">
-        <div class="container">
-            <h2>Comece agora!</h2>
-            <button>Entrar</button>
-        </div>
-    </section>
+        </section>
+    </main>
+
     <footer>
         <div  class="container">
             <h3>EasyFinance</h3>
         <h4>Todos os direitos para ©RhubiMarcalDev</h4>
         </div>
     </footer>
+    <Script src="./scripts.js"></Script>
 </body>
 </html>
