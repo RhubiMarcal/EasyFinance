@@ -1,11 +1,11 @@
-import Header from './containers/header'
+import LandingPage from './pages/LandingPage'
 import GlobalStyles from './styles'
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Header />
+      <LandingPage />
     </>
   )
 }
