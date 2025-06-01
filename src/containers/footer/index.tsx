@@ -6,7 +6,7 @@ const Footer = () => (
   <FooterContainer>
     <Container>
       <h3>Comece agora!</h3>
-      <Button type="green">
+      <Button type="button" color="green">
         <>ENTRAR</>
       </Button>
     </Container>
