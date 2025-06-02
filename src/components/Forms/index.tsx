@@ -1,10 +1,11 @@
+import { FormEvent } from 'react'
 import { TitleSecondary } from '../../styles'
 import Button from '../Button'
 import { FormsContainer } from './styles'
 
 type Props = {
   children: JSX.Element
-  onSubmit?: () => void
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void
   title: string
 }
 

@@ -3,11 +3,17 @@ import FormModel from '../../components/Forms'
 import { Container, TitlePrimary } from '../../styles'
 import * as S from './styles'
 import Button from '../../components/Button'
+import { usePostLoginMutation, usePostUsuarioMutation } from '../../service/api'
 
 const Hero = () => {
   const [formActive, setFromActive] = useState<'login' | 'cadastro'>('login')
   const [formIsActive, setFromIsActive] = useState<boolean>(false)
   const [largura, setLargura] = useState(window.innerWidth)
+  const [cadastrar] = usePostUsuarioMutation()
+  const [login] = usePostLoginMutation()
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +26,18 @@ const Hero = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  const handleCadastro = async (req: User, e: React.FormEvent) => {
+    e.preventDefault()
+    const res = await cadastrar(req)
+    console.log(res)
+  }
+
+  const handleLogin = async (req: UserLogin, e: React.FormEvent) => {
+    e.preventDefault()
+    const res = await login(req)
+    console.log(res)
+  }
 
   return (
     <S.HeroContainer formActive={formIsActive}>
@@ -44,32 +62,72 @@ const Hero = () => {
         <div className="Overlay" onMouseDown={() => setFromIsActive(false)}>
           <div onMouseDown={(e) => e.stopPropagation()}>
             {formActive == 'login' ? (
-              <FormModel title="Login">
+              <FormModel
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                  handleLogin({ email, password }, e)
+                }
+                title="Login"
+              >
                 <>
                   <div className="inputDiv">
                     <label htmlFor="email">Email: </label>
-                    <input name="email" id="email" type="password" />
+                    <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                      id="email"
+                      type="email"
+                    />
                   </div>
                   <div className="inputDiv">
-                    <label htmlFor="name">Senha: </label>
-                    <input name="name" id="name" type="text" />
+                    <label htmlFor="senha">Senha: </label>
+                    <input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      name="senha"
+                      id="senha"
+                      type="password"
+                    />
                   </div>
                 </>
               </FormModel>
             ) : (
-              <FormModel title="Cadastro">
+              <FormModel
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                  handleCadastro({ name: userName, email, password }, e)
+                }
+                title="Cadastro"
+              >
                 <>
                   <div className="inputDiv">
                     <label htmlFor="userName">Usuario: </label>
-                    <input name="userName" id="userName" type="password" />
+                    <input
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      name="userName"
+                      id="userName"
+                      type="text"
+                    />
                   </div>
                   <div className="inputDiv">
                     <label htmlFor="email">Email: </label>
-                    <input name="email" id="email" type="password" />
+                    <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                      id="email"
+                      type="email"
+                    />
                   </div>
                   <div className="inputDiv">
-                    <label htmlFor="name">Senha: </label>
-                    <input name="name" id="name" type="text" />
+                    <label htmlFor="senha">Senha: </label>
+                    <input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      name="senha"
+                      id="senha"
+                      type="password"
+                    />
                   </div>
                 </>
               </FormModel>
