@@ -10,20 +10,24 @@ const api = createApi({
       query: (body) => ({
         url: '/user/add',
         method: 'POST',
-        body,
-        credentials: 'include'
+        body
       })
     }),
     PostLogin: builder.mutation<ResUser, UserLogin>({
       query: (body) => ({
         url: '/user/login',
         method: 'POST',
-        body,
-        credentials: 'include'
+        body
+      })
+    }),
+    GetMe: builder.query<User, void>({
+      query: () => ({
+        url: '/user/me'
       })
     })
   })
 })
 
-export const { usePostUsuarioMutation, usePostLoginMutation } = api
+export const { usePostUsuarioMutation, usePostLoginMutation, useGetMeQuery } =
+  api
 export default api

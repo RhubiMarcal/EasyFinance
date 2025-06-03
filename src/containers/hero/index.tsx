@@ -4,6 +4,7 @@ import { Container, TitlePrimary } from '../../styles'
 import * as S from './styles'
 import Button from '../../components/Button'
 import { usePostLoginMutation, usePostUsuarioMutation } from '../../service/api'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
   const [formActive, setFromActive] = useState<'login' | 'cadastro'>('login')
@@ -14,6 +15,7 @@ const Hero = () => {
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigator = useNavigate()
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,13 +32,17 @@ const Hero = () => {
   const handleCadastro = async (req: User, e: React.FormEvent) => {
     e.preventDefault()
     const res = await cadastrar(req)
-    console.log(res)
+    if (res?.data) {
+      navigator('/mainPage')
+    }
   }
 
   const handleLogin = async (req: UserLogin, e: React.FormEvent) => {
     e.preventDefault()
     const res = await login(req)
-    console.log(res)
+    if (res?.data) {
+      navigator('/mainPage')
+    }
   }
 
   return (
