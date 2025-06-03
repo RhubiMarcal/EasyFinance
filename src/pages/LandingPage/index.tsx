@@ -36,7 +36,7 @@ const listSections: listsection = [
 
 const LandingPage = () => (
   <>
-    <Header />
+    <Header page="landingPage" />
     <Hero />
     <Objetivo />
     <Funcoes />

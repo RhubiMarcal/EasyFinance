@@ -3,6 +3,7 @@ import { Colors, BreakPoint } from '../../styles'
 
 type Props = {
   navActive: boolean
+  page: 'landingPage' | 'MainPage'
 }
 
 export const HeaderContainer = styled.header<Props>`
@@ -18,7 +19,7 @@ export const HeaderContainer = styled.header<Props>`
     justify-content: space-between;
 
     nav {
-      display: flex;
+      display: ${({ page }) => (page === 'MainPage' ? 'none' : 'flex')};
       gap: 120px;
 
       a {
@@ -38,6 +39,8 @@ export const HeaderContainer = styled.header<Props>`
 
     > div {
       display: flex;
+      flex-direction: ${({ page }) =>
+        page === 'MainPage' ? 'row-reverse' : 'row'};
       align-items: center;
       justify-content: space-between;
       width: 100%;
@@ -97,15 +100,16 @@ export const HeaderContainer = styled.header<Props>`
   }
 `
 
-export const HamburgerButton = styled.div`
-  display: none;
+export const HamburgerButton = styled.div<{ size: 'big' | 'small' }>`
+  display: ${({ size }) => (size === 'big' ? 'flex' : 'none')};
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
   height: 100%;
+  cursor: pointer;
 
   span {
-    width: 15px;
-    height: 1px;
+    width: calc((2px * 3) + (7px * 2) + 7px);
+    height: 2px;
     background-color: ${Colors.cinzaClaro};
   }
   @media (max-width: ${BreakPoint.tablet}) {

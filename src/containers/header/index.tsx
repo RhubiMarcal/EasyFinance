@@ -2,15 +2,22 @@ import { useState } from 'react'
 import { Container, TitlePrimary } from '../../styles'
 import { HamburgerButton, HeaderContainer } from './styles'
 
-const Header = () => {
+type props = {
+  page: 'landingPage' | 'MainPage'
+}
+
+const Header = ({ page }: props) => {
   const [navActive, setNavActive] = useState(false)
 
   return (
-    <HeaderContainer navActive={navActive}>
+    <HeaderContainer page={page} navActive={navActive}>
       <Container>
         <div>
           <TitlePrimary>EasyFinance</TitlePrimary>
-          <HamburgerButton onClick={() => setNavActive(!navActive)}>
+          <HamburgerButton
+            size={page === 'landingPage' ? 'small' : 'big'}
+            onClick={() => setNavActive(!navActive)}
+          >
             <span></span>
             <span></span>
             <span></span>
