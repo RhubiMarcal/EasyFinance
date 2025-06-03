@@ -8,10 +8,14 @@ type Props = {
 
 export const HeaderContainer = styled.header<Props>`
   background-color: ${Colors.azulEscuro};
-  padding: 15px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  padding-block: 15px;
+  ${({ page }) =>
+    page == 'landingPage' &&
+    `
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  `}
 
   > div {
     display: flex;
@@ -45,6 +49,13 @@ export const HeaderContainer = styled.header<Props>`
       justify-content: space-between;
       width: 100%;
     }
+  }
+
+  hr {
+    display: ${({ page }) => (page == 'MainPage' ? 'block' : 'none')};
+    width: 100vw;
+    margin-top: 15px;
+    border: 1px solid ${Colors.verdeEscuro};
   }
 
   @media (max-width: ${BreakPoint.tablet}) {

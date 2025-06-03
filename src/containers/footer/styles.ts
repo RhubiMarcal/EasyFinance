@@ -1,11 +1,11 @@
 import { styled } from 'styled-components'
 import { Colors, Fonts, BreakPoint } from '../../styles'
 
-export const FooterContainer = styled.footer`
+export const FooterContainer = styled.footer<{ startNow?: boolean }>`
   background-color: ${Colors.cinzaClaro};
   > div {
     &:first-child {
-      display: flex;
+      display: ${({ startNow }) => (startNow ? 'flex' : 'none')};
       justify-content: space-between;
       padding-block: 20px;
       h3 {
@@ -20,7 +20,7 @@ export const FooterContainer = styled.footer`
       padding-inline: 10%;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-between;
       color: ${Colors.brancoEscuro};
       padding-block: 20px;
       span {

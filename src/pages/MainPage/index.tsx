@@ -1,10 +1,14 @@
+import Footer from '../../containers/footer'
 import Header from '../../containers/header'
-import Hero from '../../containers/hero'
+import MainPageButtons from '../../containers/MainPageButtons'
+import Welcome from '../../containers/welcome'
 
 const MainPage = () => (
   <>
     <Header page="MainPage" />
-    <Hero />
+    <Welcome />
+    <MainPageButtons />
+    <Footer />
   </>
 )
 

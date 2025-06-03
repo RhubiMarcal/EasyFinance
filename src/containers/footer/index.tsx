@@ -2,8 +2,12 @@ import Button from '../../components/Button'
 import { Container, TitlePrimary } from '../../styles'
 import { FooterContainer } from './styles'
 
-const Footer = () => (
-  <FooterContainer>
+type props = {
+  startNow?: boolean
+}
+
+const Footer = ({ startNow }: props) => (
+  <FooterContainer startNow={startNow}>
     <Container>
       <h3>Comece agora!</h3>
       <Button type="button" color="green">
@@ -13,7 +17,8 @@ const Footer = () => (
     <div>
       <TitlePrimary>EasyFinance</TitlePrimary>
       <p>
-        Todos os direitos a <span>&copy;RhubiMarcal</span>
+        Todos os direitos a <span>&copy;RhubiMarcal</span> |{' '}
+        <span>&copy;KaikalDev</span>
       </p>
     </div>
   </FooterContainer>

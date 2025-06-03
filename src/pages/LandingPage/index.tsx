@@ -48,7 +48,7 @@ const LandingPage = () => (
         key={index}
       />
     ))}
-    <Footer />
+    <Footer startNow />
   </>
 )
 

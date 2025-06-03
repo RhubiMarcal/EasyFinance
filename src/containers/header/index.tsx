@@ -29,6 +29,7 @@ const Header = ({ page }: props) => {
           <a href="#funcionalidades">Funcionalidades</a>
         </nav>
       </Container>
+      <hr />
     </HeaderContainer>
   )
 }
