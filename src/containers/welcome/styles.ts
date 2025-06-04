@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Colors, Fonts } from '../../styles'
+import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const WelcomeContainer = styled.section`
   background-color: ${Colors.azulEscuro};
@@ -23,5 +23,16 @@ export const WelcomeContainer = styled.section`
   }
   img {
     width: 250px;
+  }
+
+  @media (max-width: ${BreakPoint.mobile}) {
+    padding: 20px 0;
+    > div {
+      flex-direction: column-reverse;
+
+      img {
+        width: 100px;
+      }
+    }
   }
 `
