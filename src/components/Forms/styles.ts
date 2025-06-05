@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors, Fonts } from '../../styles'
+import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const FormsContainer = styled.form<{ modal: boolean }>`
   display: flex;
@@ -13,6 +13,7 @@ export const FormsContainer = styled.form<{ modal: boolean }>`
 
   h2 {
     text-transform: uppercase;
+    height: min-content;
   }
 
   .inputDiv {
@@ -41,7 +42,7 @@ export const Overlay = styled.div<{ active: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 4;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
@@ -60,6 +61,11 @@ export const Overlay = styled.div<{ active: boolean }>`
 
   form {
     position: relative;
-    width: 80%;
+    width: 50%;
+  }
+  @media (max-width: ${BreakPoint.tablet}) {
+    form {
+      width: 80%;
+    }
   }
 `

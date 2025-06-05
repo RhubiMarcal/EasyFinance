@@ -10,7 +10,7 @@ export const AsideUserContainer = styled.aside`
   top: 0;
   left: 0;
   width: 35%;
-  z-index: 1;
+  z-index: 3;
   background-color: ${Colors.verdeClaro};
   height: 100vh;
   display: flex;

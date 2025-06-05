@@ -51,125 +51,127 @@ const Hero = () => {
   }
 
   return (
-    <S.HeroContainer id="Home">
-      <Container>
-        <div>
-          <TitlePrimary>EasyFinance</TitlePrimary>
-          <p>
-            Plataforma ideal para gerenciar suas finanças de forma simples e
-            eficiente. Organize seu orçamento, acompanhe seus gastos e tome
-            decisões financeiras mais assertivas com facilidade e segurança.
-          </p>
-          {largura < 1024 && (
-            <Button
-              onClick={() => setFromIsActive(true)}
-              color="green"
-              type="button"
+    <>
+      <S.HeroContainer id="Home">
+        <Container>
+          <div>
+            <TitlePrimary>EasyFinance</TitlePrimary>
+            <p>
+              Plataforma ideal para gerenciar suas finanças de forma simples e
+              eficiente. Organize seu orçamento, acompanhe seus gastos e tome
+              decisões financeiras mais assertivas com facilidade e segurança.
+            </p>
+            {largura < 1024 && (
+              <Button
+                onClick={() => setFromIsActive(true)}
+                color="green"
+                type="button"
+              >
+                <>entrar</>
+              </Button>
+            )}
+          </div>
+          {formActive == 'login' ? (
+            <FormModel
+              isModal={largura < 1024}
+              active={formIsActive}
+              onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                handleLogin({ email, password }, e)
+              }
+              title="Login"
+              onClose={() => setFromIsActive(false)}
             >
-              <>entrar</>
-            </Button>
+              <>
+                <div className="inputDiv">
+                  <label htmlFor="email">Email: </label>
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+                <div className="inputDiv">
+                  <label htmlFor="senha">Senha: </label>
+                  <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name="senha"
+                    id="senha"
+                    type="password"
+                  />
+                </div>
+                <Button color="green" type="submit">
+                  <>Entrar</>
+                </Button>
+                <S.ToggleButton>
+                  <button onClick={() => setFromActive('login')}>Login</button>
+                  <button onClick={() => setFromActive('cadastro')}>
+                    Cadastro
+                  </button>
+                  <div className={formActive} />
+                </S.ToggleButton>
+              </>
+            </FormModel>
+          ) : (
+            <FormModel
+              active={formIsActive}
+              isModal={largura < 1024}
+              onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                handleCadastro({ name: userName, email, password }, e)
+              }
+              onClose={() => setFromIsActive(false)}
+              title="Cadastro"
+            >
+              <>
+                <div className="inputDiv">
+                  <label htmlFor="userName">Usuario: </label>
+                  <input
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    name="userName"
+                    id="userName"
+                    type="text"
+                  />
+                </div>
+                <div className="inputDiv">
+                  <label htmlFor="email">Email: </label>
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+                <div className="inputDiv">
+                  <label htmlFor="senha">Senha: </label>
+                  <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name="senha"
+                    id="senha"
+                    type="password"
+                  />
+                </div>
+                <Button color="green" type="submit">
+                  <>Entrar</>
+                </Button>
+                <S.ToggleButton>
+                  <button onClick={() => setFromActive('login')}>Login</button>
+                  <button onClick={() => setFromActive('cadastro')}>
+                    Cadastro
+                  </button>
+                  <div className={formActive} />
+                </S.ToggleButton>
+              </>
+            </FormModel>
           )}
-        </div>
-        {formActive == 'login' ? (
-          <FormModel
-            isModal={largura < 1024}
-            active={formIsActive}
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
-              handleLogin({ email, password }, e)
-            }
-            title="Login"
-            onClose={() => setFromIsActive(false)}
-          >
-            <>
-              <div className="inputDiv">
-                <label htmlFor="email">Email: </label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  id="email"
-                  type="email"
-                />
-              </div>
-              <div className="inputDiv">
-                <label htmlFor="senha">Senha: </label>
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="senha"
-                  id="senha"
-                  type="password"
-                />
-              </div>
-              <Button color="green" type="submit">
-                <>Entrar</>
-              </Button>
-              <S.ToggleButton>
-                <button onClick={() => setFromActive('login')}>Login</button>
-                <button onClick={() => setFromActive('cadastro')}>
-                  Cadastro
-                </button>
-                <div className={formActive} />
-              </S.ToggleButton>
-            </>
-          </FormModel>
-        ) : (
-          <FormModel
-            active={formIsActive}
-            isModal={largura < 1024}
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
-              handleCadastro({ name: userName, email, password }, e)
-            }
-            onClose={() => setFromIsActive(false)}
-            title="Cadastro"
-          >
-            <>
-              <div className="inputDiv">
-                <label htmlFor="userName">Usuario: </label>
-                <input
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  name="userName"
-                  id="userName"
-                  type="text"
-                />
-              </div>
-              <div className="inputDiv">
-                <label htmlFor="email">Email: </label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  name="email"
-                  id="email"
-                  type="email"
-                />
-              </div>
-              <div className="inputDiv">
-                <label htmlFor="senha">Senha: </label>
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  name="senha"
-                  id="senha"
-                  type="password"
-                />
-              </div>
-              <Button color="green" type="submit">
-                <>Entrar</>
-              </Button>
-              <S.ToggleButton>
-                <button onClick={() => setFromActive('login')}>Login</button>
-                <button onClick={() => setFromActive('cadastro')}>
-                  Cadastro
-                </button>
-                <div className={formActive} />
-              </S.ToggleButton>
-            </>
-          </FormModel>
-        )}
-      </Container>
+        </Container>
+      </S.HeroContainer>
       <Loader active={loadingCadastrar || loadingLogin} type="padrao" />
-    </S.HeroContainer>
+    </>
   )
 }
 

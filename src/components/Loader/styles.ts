@@ -12,5 +12,5 @@ export const LoaderContainer = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
-  z-index: 3;
+  z-index: 5;
 `

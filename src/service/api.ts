@@ -6,28 +6,57 @@ const api = createApi({
     credentials: 'include'
   }),
   endpoints: (builder) => ({
-    PostUsuario: builder.mutation<ResUser, User>({
+    PostUsuario: builder.mutation<ResAPI, User>({
       query: (body) => ({
         url: '/user/add',
         method: 'POST',
         body
       })
     }),
-    PostLogin: builder.mutation<ResUser, UserLogin>({
+    PostLogin: builder.mutation<ResAPI, UserLogin>({
       query: (body) => ({
         url: '/user/login',
         method: 'POST',
         body
       })
     }),
-    GetMe: builder.query<User, void>({
+    GetMe: builder.query<ResUser, void>({
       query: () => ({
         url: '/user/me'
+      })
+    }),
+    EditNome: builder.mutation<ResAPI, { newName: string; password: string }>({
+      query: ({ newName, password }) => ({
+        url: '/user/editNome',
+        method: 'PUT',
+        params: { newName, password }
+      })
+    }),
+    EditSenha: builder.mutation<
+      ResAPI,
+      { currentPassword: string; newPassword: string }
+    >({
+      query: ({ currentPassword, newPassword }) => ({
+        url: '/user/editSenha',
+        method: 'PUT',
+        params: { currentPassword, newPassword }
+      })
+    }),
+    Logout: builder.mutation<ResAPI, void>({
+      query: () => ({
+        url: '/user/logout',
+        method: 'POST'
       })
     })
   })
 })
 
-export const { usePostUsuarioMutation, usePostLoginMutation, useGetMeQuery } =
-  api
+export const {
+  usePostUsuarioMutation,
+  usePostLoginMutation,
+  useGetMeQuery,
+  useEditNomeMutation,
+  useEditSenhaMutation,
+  useLogoutMutation
+} = api
 export default api
