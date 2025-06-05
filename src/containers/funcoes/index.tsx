@@ -10,7 +10,7 @@ const Funcoes = () => {
   ]
 
   return (
-    <FuncoesContainer>
+    <FuncoesContainer id="Funcionalidades">
       <Container>
         <TitleSecondary>
           Funcionalidades Financeiras Essenciais no EasyFinance

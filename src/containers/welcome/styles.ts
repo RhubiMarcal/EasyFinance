@@ -28,10 +28,12 @@ export const WelcomeContainer = styled.section`
   @media (max-width: ${BreakPoint.mobile}) {
     padding: 20px 0;
     > div {
-      flex-direction: column-reverse;
-
+      align-items: start;
+      h1 {
+        font-size: 48px;
+      }
       img {
-        width: 100px;
+        width: 130px;
       }
     }
   }

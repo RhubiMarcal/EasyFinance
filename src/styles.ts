@@ -60,6 +60,12 @@ export const TitlePrimary = styled.h1`
   font-family: ${Fonts.Jomhuria};
   font-weight: lighter;
   color: ${Colors.brancoEscuro};
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transform: translateY(7%);
 `
 
 export const TitleSecondary = styled.h2`
@@ -67,6 +73,12 @@ export const TitleSecondary = styled.h2`
   color: ${Colors.azulEscuro};
   font-family: ${Fonts.Jomhuria};
   font-weight: lighter;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transform: translateY(7%);
 `
 
 export default GlobalStyles

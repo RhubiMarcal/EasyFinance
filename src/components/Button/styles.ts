@@ -7,6 +7,10 @@ type props = {
 }
 
 export const ButtonContainer = styled.button<props>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border-radius: 50px;
   padding: 5px 50px;
   ${({ color, image }) =>
@@ -25,6 +29,7 @@ export const ButtonContainer = styled.button<props>`
   text-transform: uppercase;
   color: ${Colors.brancoEscuro};
   font-size: 24px;
+  text-decoration: none;
   cursor: pointer;
 
   @media (max-width: ${BreakPoint.mobile}) {

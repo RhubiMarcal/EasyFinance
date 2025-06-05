@@ -3,6 +3,7 @@ import { Colors, BreakPoint, Fonts } from '../../styles'
 
 export const FuncoesContainer = styled.section`
   padding-block: 40px;
+  padding-top: 85px;
 
   > div {
     display: flex;

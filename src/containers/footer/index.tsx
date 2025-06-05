@@ -10,7 +10,7 @@ const Footer = ({ startNow }: props) => (
   <FooterContainer startNow={startNow}>
     <Container>
       <h3>Comece agora!</h3>
-      <Button type="button" color="green">
+      <Button type="Link" href="#Home" color="green">
         <>ENTRAR</>
       </Button>
     </Container>

@@ -3,7 +3,7 @@ import { ObjetivoContainer } from './styles'
 import freepikBubble from '../../assets/img/freepik--speech-bubble--inject-2.svg'
 
 const Objetivo = () => (
-  <ObjetivoContainer>
+  <ObjetivoContainer id="Objetivos">
     <Container>
       <div>
         <img src={freepikBubble} alt="bubble" />

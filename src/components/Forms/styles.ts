@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 import { Colors, Fonts } from '../../styles'
 
-export const FormsContainer = styled.form`
+export const FormsContainer = styled.form<{ modal: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   justify-content: space-evenly;
-  min-height: 390px;
+  padding: 30px 60px;
+  background-color: ${Colors.verdeClaro};
+  border-radius: 50px;
+  gap: 24px;
+  width: 100%;
 
   h2 {
     text-transform: uppercase;
@@ -30,5 +33,33 @@ export const FormsContainer = styled.form`
       border-radius: 50px;
       padding: 8px 16px;
     }
+  }
+`
+
+export const Overlay = styled.div<{ active: boolean }>`
+  display: ${({ active }) => (active ? 'flex' : 'none')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+
+  .Close {
+    font-family: ${Fonts.Inter};
+    position: absolute;
+    top: 30px;
+    right: 60px;
+    cursor: pointer;
+    color: ${Colors.verdeEscuro};
+    font-weight: bold;
+  }
+
+  form {
+    position: relative;
+    width: 80%;
   }
 `

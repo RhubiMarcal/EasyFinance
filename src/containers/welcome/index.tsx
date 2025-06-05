@@ -1,10 +1,11 @@
 import { Container } from '../../styles'
 import { WelcomeContainer } from './styles'
-import dollar from '../../assets/img/dollar (1).gif'
+import dollar from '../../assets/gif/principal.gif'
 import { useGetMeQuery } from '../../service/api'
+import Loader from '../../components/Loader'
 
 const Welcome = () => {
-  const { data } = useGetMeQuery()
+  const { data, isLoading } = useGetMeQuery()
 
   return (
     <WelcomeContainer>
@@ -14,6 +15,7 @@ const Welcome = () => {
         </h1>
         <img src={dollar} alt="dollar" />
       </Container>
+      <Loader type="padrao" active={isLoading} />
     </WelcomeContainer>
   )
 }

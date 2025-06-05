@@ -12,7 +12,6 @@ export const MainButtonsConainer = styled.section`
         border-radius: 10px;
         font-size: 32px;
         padding: 25px;
-        width: 150px;
       }
     }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Container, TitlePrimary } from '../../styles'
 import { HamburgerButton, HeaderContainer } from './styles'
+import AsideUser from '../../components/AsideUser'
 
 type props = {
   page: 'landingPage' | 'MainPage'
@@ -8,6 +9,7 @@ type props = {
 
 const Header = ({ page }: props) => {
   const [navActive, setNavActive] = useState(false)
+  const [asideActive, setAsideActive] = useState(false)
 
   return (
     <HeaderContainer page={page} navActive={navActive}>
@@ -16,7 +18,11 @@ const Header = ({ page }: props) => {
           <TitlePrimary>EasyFinance</TitlePrimary>
           <HamburgerButton
             size={page === 'landingPage' ? 'small' : 'big'}
-            onClick={() => setNavActive(!navActive)}
+            onClick={
+              page === 'landingPage'
+                ? () => setNavActive(!navActive)
+                : () => setAsideActive(!asideActive)
+            }
           >
             <span></span>
             <span></span>
@@ -24,12 +30,13 @@ const Header = ({ page }: props) => {
           </HamburgerButton>
         </div>
         <nav>
-          <a href="#hero">Home</a>
-          <a href="#principal">Objetivos</a>
-          <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#Home">Home</a>
+          <a href="#Objetivos">Objetivos</a>
+          <a href="#Funcionalidades">Funcionalidades</a>
         </nav>
       </Container>
       <hr />
+      <AsideUser onClose={() => setAsideActive(false)} active={asideActive} />
     </HeaderContainer>
   )
 }

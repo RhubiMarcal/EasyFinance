@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import backgroundHero from '../../assets/img/backgraundHero.png'
 import { BreakPoint, Colors } from '../../styles'
 
-export const HeroContainer = styled.section<{ formActive: boolean }>`
+export const HeroContainer = styled.section`
   background-image: url(${backgroundHero});
   padding-block: 80px;
 
@@ -19,6 +19,8 @@ export const HeroContainer = styled.section<{ formActive: boolean }>`
       text-align: left;
       gap: 16px;
       color: white;
+      min-height: 350px;
+      height: 100%;
       p {
         line-height: 22px;
         font-size: 18px;
@@ -30,34 +32,11 @@ export const HeroContainer = styled.section<{ formActive: boolean }>`
     }
 
     > div:last-child > div {
-      padding: 30px 60px;
-      background-color: ${Colors.verdeClaro};
-      border-radius: 50px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      width: 100%;
     }
   }
 
   @media (max-width: ${BreakPoint.tablet}) {
     > div > div {
-      &:last-child {
-        display: ${({ formActive }) => (formActive ? 'flex' : 'none')};
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
-        align-items: center;
-        justify-content: center;
-
-        > div {
-          width: 80%;
-        }
-      }
       &:first-child {
         align-items: center;
         justify-content: center;

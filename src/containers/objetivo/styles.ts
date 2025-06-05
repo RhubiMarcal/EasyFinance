@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { BreakPoint } from '../../styles'
 
 export const ObjetivoContainer = styled.section`
-  padding-top: 40px;
+  padding-top: 85px;
   > div {
     p {
       text-align: justify;
