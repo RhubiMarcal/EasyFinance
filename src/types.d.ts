@@ -20,6 +20,15 @@ declare interface ResUser {
 }
 
 declare type Transaction = {
+  id: number
+  type: 'gasto' | 'ganho'
+  value: number
+  date: string
+  category: string
+  isMeta?: boolean
+}
+
+declare type TransactionReq = {
   type: 'gasto' | 'ganho'
   value: number
   date: string
@@ -28,6 +37,14 @@ declare type Transaction = {
 }
 
 declare type Goal = {
+  id: number
+  name: string
+  GoalValue: number
+  CurrentValue: number
+  historico: Transaction[]
+}
+
+declare type GoalReq = {
   name: string
   GoalValue: number
   CurrentValue: number
@@ -35,6 +52,21 @@ declare type Goal = {
 }
 
 declare type Limit = {
+  id: number
   category: string
   value: number
+}
+
+declare type LimitReq = {
+  category: string
+  value: number
+}
+
+declare type Category = {
+  id: number
+  name: string
+}
+
+declare type CategoryReq = {
+  name: string
 }

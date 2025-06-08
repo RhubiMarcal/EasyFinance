@@ -3,10 +3,12 @@ import styled, { createGlobalStyle } from 'styled-components'
 export const Colors = {
   azulEscuro: '#063E51',
   azulClaro: '#22586A',
-  cinzaClaro: '#C1C1C1',
+  cinzaClaro: '#D9D9D9',
+  cinzaEscuro: '#666666',
   brancoEscuro: '#F8FFFD',
   verdeClaro: '#AFCAC2',
-  verdeEscuro: '#157C5D'
+  verdeEscuro: '#157C5D',
+  red: '#7C1515'
 }
 
 export const BreakPoint = {
@@ -16,7 +18,7 @@ export const BreakPoint = {
 
 export const Fonts = {
   Jomhuria: "'Jomhuria', serif",
-  Inter: "'Inter', sans-serif"
+  Markazi: "'Markazi Text', serif"
 }
 
 const GlobalStyles = createGlobalStyle`
@@ -25,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     list-style: none;
-    font-family: ${Fonts.Inter};
+    font-family: ${Fonts.Markazi};
   }
 
   body {
@@ -34,6 +36,7 @@ const GlobalStyles = createGlobalStyle`
     scrollbar-width: none;
     -ms-overflow-style: none;
     background-color: ${Colors.brancoEscuro};
+
 
     &::-webkit-scrollbar {
       display: none;
@@ -63,7 +66,6 @@ export const TitlePrimary = styled.h1`
   line-height: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
   transform: translateY(7%);
 `
@@ -76,7 +78,6 @@ export const TitleSecondary = styled.h2`
   line-height: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
   transform: translateY(7%);
 `

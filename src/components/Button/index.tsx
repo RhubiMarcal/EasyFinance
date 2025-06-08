@@ -1,15 +1,24 @@
 import { ButtonContainer } from './styles'
 
 type Props = {
-  color: 'green' | 'darkBlue' | 'image'
+  color: 'green' | 'darkBlue' | 'image' | 'gray' | 'red'
   onClick?: () => void
   children: JSX.Element
   type: 'button' | 'reset' | 'submit' | 'Link'
   image?: string
   href?: string
+  size?: 'big' | 'small'
 }
 
-const Button = ({ type, onClick, children, color, image, href }: Props) => {
+const Button = ({
+  type,
+  onClick,
+  children,
+  color,
+  image,
+  href,
+  size
+}: Props) => {
   const isLink = type === 'Link'
 
   return (
@@ -20,6 +29,7 @@ const Button = ({ type, onClick, children, color, image, href }: Props) => {
       color={color}
       image={image}
       type={!isLink ? type : undefined}
+      size={size ? size : 'small'}
     >
       {children}
     </ButtonContainer>

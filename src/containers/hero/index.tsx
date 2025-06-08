@@ -6,6 +6,7 @@ import Button from '../../components/Button'
 import { usePostLoginMutation, usePostUsuarioMutation } from '../../service/api'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
+import { ToggleButton } from '../../components/ToggleButton'
 
 const Hero = () => {
   const [formActive, setFromActive] = useState<'login' | 'cadastro'>('login')
@@ -105,13 +106,12 @@ const Hero = () => {
                 <Button color="green" type="submit">
                   <>Entrar</>
                 </Button>
-                <S.ToggleButton>
-                  <button onClick={() => setFromActive('login')}>Login</button>
-                  <button onClick={() => setFromActive('cadastro')}>
-                    Cadastro
-                  </button>
-                  <div className={formActive} />
-                </S.ToggleButton>
+                <ToggleButton<'login' | 'cadastro'>
+                  value={formActive}
+                  buttonLeft="login"
+                  buttonRight="cadastro"
+                  onChange={(v) => setFromActive(v)}
+                />
               </>
             </FormModel>
           ) : (
@@ -158,13 +158,12 @@ const Hero = () => {
                 <Button color="green" type="submit">
                   <>Entrar</>
                 </Button>
-                <S.ToggleButton>
-                  <button onClick={() => setFromActive('login')}>Login</button>
-                  <button onClick={() => setFromActive('cadastro')}>
-                    Cadastro
-                  </button>
-                  <div className={formActive} />
-                </S.ToggleButton>
+                <ToggleButton<'login' | 'cadastro'>
+                  value={formActive}
+                  buttonLeft="login"
+                  buttonRight="cadastro"
+                  onChange={(v) => setFromActive(v)}
+                />
               </>
             </FormModel>
           )}

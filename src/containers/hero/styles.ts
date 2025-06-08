@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import backgroundHero from '../../assets/img/backgraundHero.png'
-import { BreakPoint, Colors } from '../../styles'
+import { BreakPoint } from '../../styles'
 
 export const HeroContainer = styled.section`
   background-image: url(${backgroundHero});
@@ -19,7 +19,7 @@ export const HeroContainer = styled.section`
       text-align: left;
       gap: 16px;
       color: white;
-      min-height: 350px;
+      min-height: 400px;
       height: 100%;
       p {
         line-height: 22px;
@@ -52,64 +52,6 @@ export const HeroContainer = styled.section`
           padding: 25px 12px;
         }
       }
-    }
-  }
-`
-
-export const ToggleButton = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background-color: ${Colors.azulClaro};
-  border-radius: 20px;
-  padding: 7px;
-  position: relative;
-
-  button {
-    color: ${Colors.brancoEscuro};
-    background-color: transparent;
-    border: none;
-    padding: 5px 60px;
-    z-index: 1;
-    cursor: pointer;
-  }
-
-  div {
-    background-color: ${Colors.azulEscuro};
-    border-radius: 16px;
-    width: calc((100% - 14px) / 2);
-    height: calc(100% - 14px);
-    position: absolute;
-    left: 7px;
-    top: 7px;
-    transform: translateX(0%);
-
-    @keyframes sliderDireita {
-      from {
-        transform: translateX(0%);
-      }
-      to {
-        transform: translateX(100%);
-      }
-    }
-    @keyframes sliderEsquerda {
-      from {
-        transform: translateX(100%);
-      }
-      to {
-        transform: translateX(0%);
-      }
-    }
-    &.cadastro {
-      animation: sliderDireita 0.5s forwards;
-    }
-    &.login {
-      animation: sliderEsquerda 0.5s forwards;
-    }
-  }
-
-  @media (max-width: ${BreakPoint.mobile}) {
-    button {
-      padding: 5px 2px;
     }
   }
 `

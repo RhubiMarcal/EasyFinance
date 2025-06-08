@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors, BreakPoint } from '../../styles'
+import { Colors, BreakPoint, Fonts } from '../../styles'
 
 type Props = {
   navActive: boolean
@@ -29,7 +29,7 @@ export const HeaderContainer = styled.header<Props>`
       a {
         text-decoration: none;
         color: ${Colors.brancoEscuro};
-        font-family: 'Jomhuria', cursive;
+        font-family: ${Fonts.Jomhuria};
         font-weight: lighter;
         font-size: 32px;
         transition: all 0.3s;
@@ -72,7 +72,7 @@ export const HeaderContainer = styled.header<Props>`
         justify-content: space-around;
         gap: 0;
         width: 100%;
-        border-top: 1px solid #fff;
+        border-top: 1px solid ${Colors.brancoEscuro};
         padding-top: 8px;
         overflow: hidden;
         max-height: ${({ navActive }) => (navActive ? '200px' : '0')};

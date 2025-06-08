@@ -47,6 +47,48 @@ const api = createApi({
         url: '/user/logout',
         method: 'POST'
       })
+    }),
+    GetHistorico: builder.query<Transaction[], void>({
+      query: () => ({
+        url: '/user/historico',
+        method: 'GET'
+      })
+    }),
+    GetCategorys: builder.query<Category[], void>({
+      query: () => ({
+        url: '/category/getAll',
+        method: 'GET'
+      })
+    }),
+    PostCategory: builder.mutation<Category, CategoryReq>({
+      query: (body) => ({
+        url: '/category/add',
+        method: 'POST',
+        body
+      })
+    }),
+    PostTransaction: builder.mutation<Transaction, TransactionReq>({
+      query: (body) => ({
+        url: '/transaction/add',
+        method: 'POST',
+        body
+      })
+    }),
+    PutTransaction: builder.mutation<
+      Transaction,
+      { id: number; data: TransactionReq }
+    >({
+      query: ({ id, data }) => ({
+        url: `/transaction/edit/${id}`,
+        method: 'PUT',
+        body: data
+      })
+    }),
+    DeleteTransaction: builder.mutation<{ detail: string }, number>({
+      query: (id) => ({
+        url: `/transaction/delete/${id}`,
+        method: 'DELETE'
+      })
     })
   })
 })
@@ -57,6 +99,12 @@ export const {
   useGetMeQuery,
   useEditNomeMutation,
   useEditSenhaMutation,
-  useLogoutMutation
+  useLogoutMutation,
+  useGetHistoricoQuery,
+  useGetCategorysQuery,
+  usePostCategoryMutation,
+  usePostTransactionMutation,
+  usePutTransactionMutation,
+  useDeleteTransactionMutation
 } = api
 export default api

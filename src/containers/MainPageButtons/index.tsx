@@ -5,36 +5,51 @@ import imgHistorico from '../../assets/img/visualizarHistorico.png'
 import imgMetas from '../../assets/img/metasFinaceiras.png'
 import imgLimites from '../../assets/img/Limitesgasto.png'
 import imgGraficos from '../../assets/img/graficos.png'
+import { useNavigate } from 'react-router-dom'
 
-const MainPageButtons = () => (
-  <MainButtonsConainer>
-    <Container>
-      <Button color="darkBlue" type="button">
-        <>Adicionar transação</>
-      </Button>
-      <Button color="darkBlue" type="button">
-        <>Criar Limite</>
-      </Button>
-      <Button color="darkBlue" type="button">
-        <>Criar meta</>
-      </Button>
-    </Container>
-    <hr />
-    <Container>
-      <Button image={imgHistorico} color="image" type="button">
-        <>Visualizar Histórico</>
-      </Button>
-      <Button image={imgLimites} color="image" type="button">
-        <>Limites de gasto</>
-      </Button>
-      <Button image={imgMetas} color="image" type="button">
-        <>Metas finaceiras</>
-      </Button>
-      <Button image={imgGraficos} color="image" type="button">
-        <>Grafico de gastos</>
-      </Button>
-    </Container>
-  </MainButtonsConainer>
-)
+const MainPageButtons = () => {
+  const navigate = useNavigate()
+  return (
+    <MainButtonsConainer>
+      <Container>
+        <Button
+          onClick={() =>
+            navigate('/Historico', { state: { formActive: 'add' } })
+          }
+          color="darkBlue"
+          type="button"
+        >
+          <>Adicionar transação</>
+        </Button>
+        <Button color="darkBlue" type="button">
+          <>Criar Limite</>
+        </Button>
+        <Button color="darkBlue" type="button">
+          <>Criar meta</>
+        </Button>
+      </Container>
+      <hr />
+      <Container>
+        <Button
+          image={imgHistorico}
+          color="image"
+          type="Link"
+          href="/Historico"
+        >
+          <>Visualizar Histórico</>
+        </Button>
+        <Button image={imgLimites} color="image" type="Link">
+          <>Limites de gasto</>
+        </Button>
+        <Button image={imgMetas} color="image" type="Link">
+          <>Metas finaceiras</>
+        </Button>
+        <Button image={imgGraficos} color="image" type="Link">
+          <>Grafico de gastos</>
+        </Button>
+      </Container>
+    </MainButtonsConainer>
+  )
+}
 
 export default MainPageButtons

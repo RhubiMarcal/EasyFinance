@@ -4,6 +4,7 @@ import { BreakPoint, Colors, Fonts } from '../../styles'
 export const FormsContainer = styled.form<{ modal: boolean }>`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-evenly;
   padding: 30px 60px;
   background-color: ${Colors.verdeClaro};
@@ -20,6 +21,7 @@ export const FormsContainer = styled.form<{ modal: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
 
     label {
       font-family: ${Fonts.Jomhuria};
@@ -28,12 +30,19 @@ export const FormsContainer = styled.form<{ modal: boolean }>`
       font-size: 28px;
     }
 
-    input {
+    input,
+    select {
       border: none;
       background-color: ${Colors.brancoEscuro};
       border-radius: 50px;
       padding: 8px 16px;
+      font-size: 22px;
     }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 16px;
   }
 `
 
@@ -50,13 +59,14 @@ export const Overlay = styled.div<{ active: boolean }>`
   justify-content: center;
 
   .Close {
-    font-family: ${Fonts.Inter};
+    font-family: ${Fonts.Markazi};
     position: absolute;
     top: 30px;
     right: 60px;
     cursor: pointer;
-    color: ${Colors.verdeEscuro};
+    color: ${Colors.azulEscuro};
     font-weight: bold;
+    font-size: 32px;
   }
 
   form {

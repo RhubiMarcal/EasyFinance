@@ -20,7 +20,7 @@ export const AsideUserContainer = styled.aside`
   justify-content: space-between;
 
   .Close {
-    font-family: ${Fonts.Inter};
+    font-family: ${Fonts.Markazi};
     position: absolute;
     top: 25px;
     right: 25px;

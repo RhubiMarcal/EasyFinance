@@ -15,6 +15,12 @@ export const ModelSectionsContainer = styled.section`
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      p {
+        font-size: 22px;
+        line-height: 22px;
+        text-align: justify;
+      }
     }
   }
   &:nth-child(2n) {
@@ -23,6 +29,10 @@ export const ModelSectionsContainer = styled.section`
     > div {
       flex-direction: row-reverse;
       text-align: right;
+    }
+
+    > div h2 {
+      justify-content: end;
     }
   }
 

@@ -10,7 +10,6 @@ export const MainButtonsConainer = styled.section`
       padding-block: 30px;
       button {
         border-radius: 10px;
-        font-size: 32px;
         padding: 25px;
       }
     }
@@ -21,8 +20,8 @@ export const MainButtonsConainer = styled.section`
       grid-template-columns: 1fr 1fr;
       gap: 50px;
       align-items: stretch;
-      button {
-        font-size: 48px;
+      a {
+        font-size: 50px;
         padding: 80px 50px;
         height: 260px;
       }
@@ -54,9 +53,10 @@ export const MainButtonsConainer = styled.section`
       &:last-child {
         gap: 25px;
         grid-template-columns: 1fr;
-        button {
+        a {
+          font-size: 38px;
           height: auto;
-          padding: 40px 50px;
+          padding: 40px 25px;
         }
       }
     }

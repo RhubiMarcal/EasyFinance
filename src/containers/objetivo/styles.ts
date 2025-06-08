@@ -9,6 +9,7 @@ export const ObjetivoContainer = styled.section`
       margin-top: 15px;
       padding-inline: 10%;
       line-height: 22px;
+      font-size: 22px;
     }
 
     > div {

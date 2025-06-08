@@ -3,6 +3,10 @@ import { Colors, Fonts, BreakPoint } from '../../styles'
 
 export const FooterContainer = styled.footer<{ startNow?: boolean }>`
   background-color: ${Colors.cinzaClaro};
+  position: static;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
   > div {
     &:first-child {
       display: ${({ startNow }) => (startNow ? 'flex' : 'none')};
@@ -23,6 +27,7 @@ export const FooterContainer = styled.footer<{ startNow?: boolean }>`
       justify-content: space-between;
       color: ${Colors.brancoEscuro};
       padding-block: 20px;
+      font-size: 22px;
       span {
         text-decoration: underline;
       }
