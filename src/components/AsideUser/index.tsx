@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import FormModel from '../Forms'
 import { useState } from 'react'
+import { setName } from '../../store/slices/userSlice'
+import { useNavigate } from 'react-router-dom'
+import Loader from '../Loader'
 import {
   useEditNomeMutation,
   useEditSenhaMutation,
   useLogoutMutation
-} from '../../service/api'
-import { setName } from '../../store/reducers/user'
-import { useNavigate } from 'react-router-dom'
-import Loader from '../Loader'
+} from '../../service/Hooks/userAPI'
 
 type Props = {
   active: boolean

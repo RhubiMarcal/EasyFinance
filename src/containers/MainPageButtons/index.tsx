@@ -21,7 +21,11 @@ const MainPageButtons = () => {
         >
           <>Adicionar transação</>
         </Button>
-        <Button color="darkBlue" type="button">
+        <Button
+          color="darkBlue"
+          type="button"
+          onClick={() => navigate('/Limites', { state: { formActive: 'add' } })}
+        >
           <>Criar Limite</>
         </Button>
         <Button color="darkBlue" type="button">
@@ -38,7 +42,7 @@ const MainPageButtons = () => {
         >
           <>Visualizar Histórico</>
         </Button>
-        <Button image={imgLimites} color="image" type="Link">
+        <Button image={imgLimites} color="image" type="Link" href="/Limites">
           <>Limites de gasto</>
         </Button>
         <Button image={imgMetas} color="image" type="Link">

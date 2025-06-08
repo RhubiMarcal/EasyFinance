@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useGetCategorysQuery } from '../../service/api'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategorys } from '../../store/reducers/user'
 import { RootReducer } from '../../store'
+import { useGetCategorysQuery } from '../../service/Hooks/categoryAPI'
+import { setCategorys } from '../../store/slices/categorySlice'
 
 type Props = {
   value: string
@@ -14,7 +14,7 @@ const SelectCategorias = ({ value, onChange }: Props) => {
     refetchOnMountOrArgChange: true
   })
   const dispatch = useDispatch()
-  const { categorys } = useSelector((state: RootReducer) => state.user)
+  const { categorys } = useSelector((state: RootReducer) => state.categories)
 
   useEffect(() => {
     if (data) {

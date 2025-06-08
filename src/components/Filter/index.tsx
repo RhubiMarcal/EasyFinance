@@ -1,18 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 import { FilterContainer } from './styles'
+import Error from '../Error'
 
 type Props = {
   categorys: Category[]
-  onChange: (filtros: {
-    categoryAtivo: boolean
-    categoria: string
-    dateAtivo: boolean
-    inicio: string
-    fim: string
-  }) => void
+  onChange: (filtros: Filters) => void
+  hasCategory?: boolean
+  hasDate?: boolean
 }
 
-const Filter = ({ categorys, onChange }: Props) => {
+export type Filters = {
+  categoryAtivo?: boolean
+  categoria?: string
+  dateAtivo?: boolean
+  inicio?: string
+  fim?: string
+}
+
+const Filter = ({ categorys, onChange, hasCategory, hasDate }: Props) => {
   const [useCategoryFilter, setUseCategoryFilter] = useState(false)
   const [useDateFilter, setUseDateFilter] = useState(false)
   const [categoryFilter, setCategoryFilter] = useState('')
@@ -48,74 +53,76 @@ const Filter = ({ categorys, onChange }: Props) => {
 
   return (
     <FilterContainer>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={useCategoryFilter}
-            onChange={() => setUseCategoryFilter(!useCategoryFilter)}
-          />
-          <p>Filtrar por categoria:</p>
-        </label>
-
-        <select
-          id="filterCategory"
-          name="filterCategory"
-          disabled={!useCategoryFilter}
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-        >
-          {categorys.map((cat) => (
-            <option key={cat.id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={useDateFilter}
-            onChange={() => setUseDateFilter(!useDateFilter)}
-          />
-          <p>Filtrar por período:</p>
-        </label>
-
+      {hasCategory && (
         <div>
-          <label htmlFor="FilterDateStart">
-            <p>De:</p>{' '}
+          <label>
+            <input
+              type="checkbox"
+              checked={useCategoryFilter}
+              onChange={() => setUseCategoryFilter(!useCategoryFilter)}
+            />
+            <p>Filtrar por categoria:</p>
           </label>
-          <input
-            type="date"
-            id="FilterDateStart"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            disabled={!useDateFilter}
-            max={today}
-          />
 
-          <label htmlFor="FilterDateEnd">
-            <p>Até:</p>{' '}
-          </label>
-          <input
-            type="date"
-            id="FilterDateEnd"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            disabled={!useDateFilter}
-            max={today}
-            min={startDate || undefined}
-          />
-
-          {isEndBeforeStart && (
-            <p style={{ color: 'red' }}>
-              Data final não pode ser antes da inicial.
-            </p>
-          )}
+          <select
+            id="filterCategory"
+            name="filterCategory"
+            disabled={!useCategoryFilter}
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+          >
+            {categorys.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
+      )}
+
+      {hasDate && (
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={useDateFilter}
+              onChange={() => setUseDateFilter(!useDateFilter)}
+            />
+            <p>Filtrar por período:</p>
+          </label>
+
+          <div>
+            <label htmlFor="FilterDateStart">
+              <p>De:</p>{' '}
+            </label>
+            <input
+              type="date"
+              id="FilterDateStart"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              disabled={!useDateFilter}
+              max={today}
+            />
+
+            <label htmlFor="FilterDateEnd">
+              <p>Até:</p>{' '}
+            </label>
+            <input
+              type="date"
+              id="FilterDateEnd"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              disabled={!useDateFilter}
+              max={today}
+              min={startDate || undefined}
+            />
+
+            {isEndBeforeStart && (
+              <Error msg="Data final não pode ser antes da inicial." />
+            )}
+          </div>
+        </div>
+      )}
     </FilterContainer>
   )
 }

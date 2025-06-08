@@ -82,4 +82,14 @@ export const TitleSecondary = styled.h2`
   transform: translateY(7%);
 `
 
+export const MainDashboard = styled.main`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  > section {
+    flex: 1;
+  }
+`
+
 export default GlobalStyles

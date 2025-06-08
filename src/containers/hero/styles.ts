@@ -23,7 +23,7 @@ export const HeroContainer = styled.section`
       height: 100%;
       p {
         line-height: 22px;
-        font-size: 18px;
+        font-size: 22px;
       }
 
       h1 {

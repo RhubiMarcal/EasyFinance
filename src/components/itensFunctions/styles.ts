@@ -45,15 +45,6 @@ export const ContainerItenHistorico = styled.li`
     line-height: 1;
   }
 
-  > button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
   @media (max-width: ${BreakPoint.mobile}) {
     > button {
       bottom: 10px;
@@ -80,6 +71,52 @@ export const ContainerItenHistorico = styled.li`
   }
 `
 
+export const ContainerItenLimite = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  background-color: ${Colors.cinzaClaro};
+  border: 3px solid ${Colors.verdeEscuro};
+  border-radius: 25px;
+  padding: 22px;
+  position: relative;
+
+  > div:first-child {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    > div {
+      > p {
+        font-size: 48px;
+        font-family: ${Fonts.Jomhuria};
+      }
+    }
+  }
+
+  @media (max-width: ${BreakPoint.mobile}) {
+    padding-bottom: 80px;
+    > button:first-of-type {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+  }
+`
+
 export const ContainerItenMetas = styled.li``
 
-export const ContainerItenLimite = styled.li``
+export const ButtonEdit = styled.button`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`

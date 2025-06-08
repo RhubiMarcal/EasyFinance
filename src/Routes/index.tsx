@@ -3,6 +3,7 @@ import LandingPage from '../pages/LandingPage'
 import MainPage from '../pages/MainPage'
 import ProtectedRoute from './protectedRoute'
 import Historico from '../pages/historico'
+import Limites from '../pages/limite'
 
 const Routes = () => (
   <RouteList>
@@ -20,6 +21,14 @@ const Routes = () => (
       element={
         <ProtectedRoute loader="historico">
           <Historico />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/Limites"
+      element={
+        <ProtectedRoute loader="limit">
+          <Limites />
         </ProtectedRoute>
       }
     />

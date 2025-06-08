@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
 import Loader from '../components/Loader'
-import { useGetMeQuery } from '../service/api'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { setEmail, setName } from '../store/reducers/user'
+import { setEmail, setName } from '../store/slices/userSlice'
+import { useGetMeQuery } from '../service/Hooks/userAPI'
 
 type Props = {
   children: JSX.Element

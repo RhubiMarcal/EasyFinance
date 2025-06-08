@@ -3,10 +3,14 @@ import FormModel from '../../components/Forms'
 import { Container, TitlePrimary } from '../../styles'
 import * as S from './styles'
 import Button from '../../components/Button'
-import { usePostLoginMutation, usePostUsuarioMutation } from '../../service/api'
+import {
+  usePostLoginMutation,
+  usePostUsuarioMutation
+} from '../../service/Hooks/userAPI'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import { ToggleButton } from '../../components/ToggleButton'
+import Error from '../../components/Error'
 
 const Hero = () => {
   const [formActive, setFromActive] = useState<'login' | 'cadastro'>('login')
@@ -17,6 +21,7 @@ const Hero = () => {
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [erro, setErro] = useState('')
   const navigator = useNavigate()
 
   useEffect(() => {
@@ -33,21 +38,31 @@ const Hero = () => {
 
   const handleLogin = async (req: UserLogin, e: React.FormEvent) => {
     e.preventDefault()
+    if (req.email == '' || req.password == '') {
+      setErro('Todos os campos são obrigatórios')
+      return
+    }
     try {
       await login(req).unwrap()
+      setErro('')
       navigator('/mainPage')
     } catch (err) {
-      console.error('Erro ao logar:', err)
+      setErro('Erro ao logar: ' + err)
     }
   }
 
   const handleCadastro = async (req: User, e: React.FormEvent) => {
     e.preventDefault()
+    if (req.email == '' || req.password == '' || req.name == '') {
+      setErro('Todos os campos são obrigatórios')
+      return
+    }
     try {
       await cadastrar(req).unwrap()
+      setErro('')
       navigator('/mainPage')
     } catch (err) {
-      console.error('Erro ao cadastrar:', err)
+      setErro('Erro ao cadastrar: ' + err)
     }
   }
 
@@ -112,6 +127,7 @@ const Hero = () => {
                   buttonRight="cadastro"
                   onChange={(v) => setFromActive(v)}
                 />
+                <Error msg={erro} />
               </>
             </FormModel>
           ) : (
@@ -164,6 +180,7 @@ const Hero = () => {
                   buttonRight="cadastro"
                   onChange={(v) => setFromActive(v)}
                 />
+                <Error msg={erro} />
               </>
             </FormModel>
           )}

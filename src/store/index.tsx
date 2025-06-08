@@ -1,14 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit'
-import api from '../service/api'
-import userReducer from './reducers/user'
+import userReducer from './slices/userSlice'
+import transactionReducer from './slices/transactionSlice'
+import goalReducer from './slices/goalSlice'
+import limitReducer from './slices/limitSlice'
+import categoryReducer from './slices/categorySlice'
+import { baseAPI } from '../service/api'
 
 export const Store = configureStore({
   reducer: {
     user: userReducer,
-    [api.reducerPath]: api.reducer
+    transactions: transactionReducer,
+    goals: goalReducer,
+    limits: limitReducer,
+    categories: categoryReducer,
+    [baseAPI.reducerPath]: baseAPI.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware)
+    getDefaultMiddleware().concat(baseAPI.middleware)
 })
 
 export type AppDispatch = typeof Store.dispatch

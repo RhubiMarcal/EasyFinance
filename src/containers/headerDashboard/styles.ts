@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { BreakPoint, Colors } from '../../styles'
 
 export const HeaderDashboardContainer = styled.div<{ activeFilter: boolean }>`
@@ -84,11 +84,4 @@ export const HeaderDashboardContainer = styled.div<{ activeFilter: boolean }>`
       }
     }
   }
-`
-
-export const ListItenDashboard = styled.ul`
-  padding-block: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 `

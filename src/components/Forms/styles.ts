@@ -11,6 +11,7 @@ export const FormsContainer = styled.form<{ modal: boolean }>`
   border-radius: 50px;
   gap: 24px;
   width: 100%;
+  position: relative;
 
   h2 {
     text-transform: uppercase;
