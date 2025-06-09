@@ -2,16 +2,14 @@ import Button from '../Button'
 import { AsideUserContainer, Overlay } from './styles'
 import fotoUser from '../../assets/img/UserFoto.png'
 import { TitleSecondary } from '../../styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
 import FormModel from '../Forms'
 import { useState } from 'react'
-import { setName } from '../../store/slices/userSlice'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../Loader'
 import {
   useEditNomeMutation,
   useEditSenhaMutation,
+  useGetMeQuery,
   useLogoutMutation
 } from '../../service/Hooks/userAPI'
 
@@ -21,7 +19,6 @@ type Props = {
 }
 
 const AsideUser = ({ active, onClose }: Props) => {
-  const { nome } = useSelector((state: RootReducer) => state.user)
   const [editName, setEdtName] = useState(false)
   const [editPassword, setEdtPassword] = useState(false)
   const [newName, setNewName] = useState('')
@@ -30,8 +27,8 @@ const AsideUser = ({ active, onClose }: Props) => {
   const [PUTEditNome, { isLoading: loadingEditNome }] = useEditNomeMutation()
   const [PUTEditPassword, { isLoading: loadingEditPassword }] =
     useEditSenhaMutation()
+  const { data: userData, isLoading: loadingUser } = useGetMeQuery()
   const [logout] = useLogoutMutation()
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleCloseEditName = () => {
@@ -48,7 +45,6 @@ const AsideUser = ({ active, onClose }: Props) => {
     e.preventDefault()
     try {
       await PUTEditNome({ newName, password })
-      dispatch(setName(newName))
       setEdtName(false)
       setNewName('')
       setPassword('')
@@ -86,7 +82,7 @@ const AsideUser = ({ active, onClose }: Props) => {
         <AsideUserContainer onMouseDown={(e) => e.stopPropagation()}>
           <div>
             <img src={fotoUser} alt="foto do usuário" />
-            <TitleSecondary>{nome}</TitleSecondary>
+            <TitleSecondary>{userData?.name}</TitleSecondary>
             <Button
               onClick={handleCloseEditName}
               color="darkBlue"
@@ -181,7 +177,10 @@ const AsideUser = ({ active, onClose }: Props) => {
           </>
         </FormModel>
       )}
-      <Loader active={loadingEditNome || loadingEditPassword} type="padrao" />
+      <Loader
+        active={loadingEditNome || loadingEditPassword || loadingUser}
+        type="padrao"
+      />
     </>
   )
 }

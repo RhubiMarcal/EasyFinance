@@ -1,7 +1,5 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
 
 import Header from '../../containers/header'
 import Footer from '../../containers/footer'
@@ -16,7 +14,10 @@ import Loader from '../../components/Loader'
 import Error from '../../components/Error'
 
 import { useGetHistoricoQuery } from '../../service/Hooks/userAPI'
-import { usePostCategoryMutation } from '../../service/Hooks/categoryAPI'
+import {
+  useGetCategorysQuery,
+  usePostCategoryMutation
+} from '../../service/Hooks/categoryAPI'
 import {
   useDeleteTransactionMutation,
   usePostTransactionMutation,
@@ -24,18 +25,20 @@ import {
 } from '../../service/Hooks/transactionAPI'
 
 import { MainDashboard } from '../../styles'
-import { addToCategory } from '../../store/slices/categorySlice'
-import {
-  addToHistorico,
-  deleteTransaction,
-  setHistorico
-} from '../../store/slices/transactionSlice'
 
 type TransactionType = 'gasto' | 'ganho'
 
 const Historico = () => {
-  const { data: historicoData, isLoading: loadingHistorico } =
-    useGetHistoricoQuery()
+  const {
+    data: transactions,
+    isLoading: loadingHistorico,
+    refetch: refetchHistorico
+  } = useGetHistoricoQuery()
+  const {
+    data: categorys,
+    isLoading: loadingCategorias,
+    refetch: refetchCategorias
+  } = useGetCategorysQuery()
   const [postCategory, { isLoading: loadingCategoria }] =
     usePostCategoryMutation()
   const [postTransaction, { isLoading: loadingTransaction }] =
@@ -44,12 +47,6 @@ const Historico = () => {
     usePutTransactionMutation()
   const [deletTransaction, { isLoading: loadingDeletTransaction }] =
     useDeleteTransactionMutation()
-
-  const dispatch = useDispatch()
-  const { transactions, categorys } = useSelector((state: RootReducer) => ({
-    transactions: state.transactions.transactions,
-    categorys: state.categories.categorys
-  }))
   const location = useLocation()
 
   const [formActive, setFormActive] = useState<'add' | 'edit'>()
@@ -75,7 +72,8 @@ const Historico = () => {
     loadingCategoria ||
     loadingTransaction ||
     loadingEditTransaction ||
-    loadingDeletTransaction
+    loadingDeletTransaction ||
+    loadingCategorias
 
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
@@ -87,22 +85,25 @@ const Historico = () => {
       return
     }
     try {
-      const categoriaExiste = categorys.some(
-        (c) => c.name.toLowerCase() === category.toLowerCase()
-      )
+      let categoriaExiste
+      if (categorys) {
+        categoriaExiste = categorys.some(
+          (c) => c.name.toLowerCase() === category.toLowerCase()
+        )
+      }
 
       const nomeFormatado = capitalize(category)
 
       if (!categoriaExiste) {
-        const categoryDb: Category = await postCategory({
+        await postCategory({
           name: nomeFormatado
         }).unwrap()
-        dispatch(addToCategory(categoryDb))
+        await refetchCategorias()
       }
 
       const tran: TransactionReq = { category, date, type, value }
-      const transDb: Transaction = await postTransaction(tran).unwrap()
-      dispatch(addToHistorico(transDb))
+      await postTransaction(tran).unwrap()
+      await refetchHistorico()
 
       handleClose()
     } catch (err) {
@@ -129,26 +130,29 @@ const Historico = () => {
       return
     }
     try {
-      const categoriaExiste = categorys.some(
-        (c) => c.name.toLowerCase() === category.toLowerCase()
-      )
+      let categoriaExiste
+      if (categorys) {
+        categoriaExiste = categorys.some(
+          (c) => c.name.toLowerCase() === category.toLowerCase()
+        )
+      }
 
       const nomeFormatado = capitalize(category)
 
       if (!categoriaExiste) {
-        const categoryDb: Category = await postCategory({
+        await postCategory({
           name: nomeFormatado
         }).unwrap()
-        dispatch(addToCategory(categoryDb))
+        await refetchCategorias()
       }
 
       if (id) {
         const tran: TransactionReq = { category, date, type, value }
-        const transDb: Transaction = await putTransaction({
+        await putTransaction({
           data: tran,
           id
         }).unwrap()
-        dispatch(addToHistorico(transDb))
+        await refetchHistorico()
 
         handleClose()
       }
@@ -161,7 +165,7 @@ const Historico = () => {
     try {
       if (id) {
         await deletTransaction(id).unwrap()
-        dispatch(deleteTransaction(id))
+        await refetchHistorico()
         handleClose()
       } else {
         setErro('Erro ao acessar o Id, Tente novamente')
@@ -182,7 +186,10 @@ const Historico = () => {
 
   useEffect(() => {
     const aplicarFiltros = () => {
-      let filtradas = [...transactions]
+      let filtradas: Transaction[] = []
+      if (transactions) {
+        filtradas = [...transactions]
+      }
 
       if (filtersActive) {
         const { categoryAtivo, categoria, dateAtivo, inicio, fim } = filters
@@ -217,12 +224,6 @@ const Historico = () => {
   }, [transactions, filtersActive, filters])
 
   useEffect(() => {
-    if (historicoData) {
-      dispatch(setHistorico(historicoData))
-    }
-  }, [historicoData, dispatch])
-
-  useEffect(() => {
     const formActiveFromLocation = location.state?.formActive
     if (formActiveFromLocation === 'add' && formActive !== 'add') {
       setFormActive('add')
@@ -243,12 +244,12 @@ const Historico = () => {
               hasCategory
               hasDate
               onChange={(filtros) => setFilters(filtros)}
-              categorys={categorys}
+              categorys={categorys ? categorys : []}
             />
           }
         />
         <ListDashboard
-          itenList={filteredTransactions}
+          itenList={filteredTransactions ? filteredTransactions : []}
           name="Histórico"
           onEdit={(item) => handleEdit(item)}
         />

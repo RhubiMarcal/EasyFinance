@@ -13,10 +13,20 @@ const ListDashboard = <T extends Transaction | Goal | Limit>({
   name,
   onEdit
 }: Props<T>) => {
+  const sortedList = [...itenList].sort((a, b) => {
+    if (name === 'Histórico') {
+      const tA = a as Transaction
+      const tB = b as Transaction
+      return new Date(tB.date).getTime() - new Date(tA.date).getTime()
+    } else {
+      return a.id - b.id
+    }
+  })
+
   return (
     <Container>
       <ListItenDashboard page={name}>
-        {itenList.map((item) => (
+        {sortedList.map((item) => (
           <ItensFunctions
             onEdit={() => onEdit(item)}
             item={item}

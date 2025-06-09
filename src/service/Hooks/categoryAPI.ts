@@ -6,14 +6,16 @@ export const categoryAPI = baseAPI.injectEndpoints({
       query: () => ({
         url: '/category/getAll',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Categoria']
     }),
     PostCategory: builder.mutation<Category, CategoryReq>({
       query: (body) => ({
         url: '/category/add',
         method: 'POST',
         body
-      })
+      }),
+      invalidatesTags: ['Categoria']
     })
   })
 })

@@ -5,5 +5,6 @@ export const baseAPI = createApi({
     baseUrl: 'https://easyfinanceapi-backend-production.up.railway.app',
     credentials: 'include'
   }),
+  tagTypes: ['Historico', 'Categoria', 'Usuario', 'Meta', 'Limit'],
   endpoints: () => ({})
 })

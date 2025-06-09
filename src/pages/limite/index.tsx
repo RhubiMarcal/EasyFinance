@@ -7,13 +7,6 @@ import {
   usePutLimitMutation
 } from '../../service/Hooks/limitAPI'
 import { MainDashboard } from '../../styles'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  addToLimits,
-  deleteLimit,
-  setLimits
-} from '../../store/slices/limitSlice'
-import { RootReducer } from '../../store'
 import Loader from '../../components/Loader'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Filter, { Filters } from '../../components/Filter'
@@ -23,20 +16,17 @@ import FormModel from '../../components/Forms'
 import Error from '../../components/Error'
 import InputMoeda from '../../components/InputMoeda'
 import { useGetCategorysQuery } from '../../service/Hooks/categoryAPI'
-import { setCategorys } from '../../store/slices/categorySlice'
 import HeaderDashboard from '../../containers/headerDashboard'
 import ListDashboard from '../../containers/listDashboard'
 
 const Limites = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { data: limitsData, isLoading: loadingLimits } = useGetLimitsQuery()
-  const { data: categoryData, isLoading: loadingCategory } =
-    useGetCategorysQuery()
-  const { limits, categorys } = useSelector((state: RootReducer) => ({
-    limits: state.limits.limits,
-    categorys: state.categories.categorys
-  }))
+  const {
+    data: limits,
+    isLoading: loadingLimits,
+    refetch
+  } = useGetLimitsQuery()
+  const { data: categorys, isLoading: loadingCategory } = useGetCategorysQuery()
   const location = useLocation()
 
   const [formActive, setFormActive] = useState<'add' | 'edit'>()
@@ -58,12 +48,6 @@ const Limites = () => {
   const [id, setId] = useState<number>()
 
   useEffect(() => {
-    if (limitsData) {
-      dispatch(setLimits(limitsData))
-    }
-  }, [limitsData, dispatch])
-
-  useEffect(() => {
     const formActiveFromLocation = location.state?.formActive
     if (formActiveFromLocation === 'add' && formActive !== 'add') {
       setFormActive('add')
@@ -72,14 +56,11 @@ const Limites = () => {
   }, [location.state, formActive])
 
   useEffect(() => {
-    if (categoryData) {
-      dispatch(setCategorys(categoryData))
-    }
-  }, [categoryData, dispatch])
-
-  useEffect(() => {
     const aplicarFiltros = () => {
-      let filtradas = [...limits]
+      let filtradas: Limit[] = []
+      if (limits) {
+        filtradas = [...limits]
+      }
 
       if (filterActive) {
         const { categoryAtivo, categoria } = filters
@@ -114,8 +95,8 @@ const Limites = () => {
     }
     try {
       const limit: LimitReq = { category: categoryName, value: limitValue }
-      const limitDb: Limit = await postLimit(limit).unwrap()
-      dispatch(addToLimits(limitDb))
+      await postLimit(limit).unwrap()
+      await refetch()
       handleClose()
     } catch (err) {
       setError('Erro ao adicionar: ' + err)
@@ -134,8 +115,8 @@ const Limites = () => {
     try {
       if (id) {
         const limit: LimitReq = { category: categoryName, value: limitValue }
-        const limitDb: Limit = await putLimit({ data: limit, id }).unwrap()
-        dispatch(addToLimits(limitDb))
+        await putLimit({ data: limit, id }).unwrap()
+        await refetch()
         handleClose()
       }
     } catch (err) {
@@ -147,7 +128,7 @@ const Limites = () => {
     try {
       if (id) {
         await deletLimit(id).unwrap()
-        dispatch(deleteLimit(id))
+        await refetch()
         handleClose()
       } else {
         setError('Erro ao acessar o Id, Tente novamente')
@@ -179,12 +160,12 @@ const Limites = () => {
             <Filter
               hasCategory
               onChange={(filters) => setFilters(filters)}
-              categorys={categorys}
+              categorys={categorys ? categorys : []}
             />
           }
         />
         <ListDashboard
-          itenList={filtredLimit}
+          itenList={filtredLimit ? filtredLimit : []}
           name="Limites"
           onEdit={handleEdit}
         />
@@ -210,7 +191,7 @@ const Limites = () => {
               onChange={(e) => setCategoryName(e.target.value)}
             >
               <option value=""></option>
-              {categorys.map((cat) => (
+              {categorys?.map((cat) => (
                 <option value={cat.name} key={cat.id}>
                   {cat.name}
                 </option>

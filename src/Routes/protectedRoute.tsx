@@ -1,8 +1,5 @@
 import { Navigate } from 'react-router-dom'
 import Loader from '../components/Loader'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { setEmail, setName } from '../store/slices/userSlice'
 import { useGetMeQuery } from '../service/Hooks/userAPI'
 
 type Props = {
@@ -12,14 +9,6 @@ type Props = {
 
 const ProtectedRoute = ({ children, loader }: Props) => {
   const { data, isLoading, isError } = useGetMeQuery()
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (data?.name) {
-      dispatch(setName(data.name))
-      dispatch(setEmail(data.email))
-    }
-  }, [data, dispatch])
 
   if (isLoading) return <Loader active type={loader} />
   if (isError || !data) return <Navigate to="/" />

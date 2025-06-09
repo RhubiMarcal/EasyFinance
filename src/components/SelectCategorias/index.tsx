@@ -1,8 +1,4 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
 import { useGetCategorysQuery } from '../../service/Hooks/categoryAPI'
-import { setCategorys } from '../../store/slices/categorySlice'
 
 type Props = {
   value: string
@@ -10,17 +6,9 @@ type Props = {
 }
 
 const SelectCategorias = ({ value, onChange }: Props) => {
-  const { data, isLoading } = useGetCategorysQuery(undefined, {
+  const { data: categorys, isLoading } = useGetCategorysQuery(undefined, {
     refetchOnMountOrArgChange: true
   })
-  const dispatch = useDispatch()
-  const { categorys } = useSelector((state: RootReducer) => state.categories)
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setCategorys(data))
-    }
-  }, [data, dispatch])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value)
@@ -37,7 +25,7 @@ const SelectCategorias = ({ value, onChange }: Props) => {
         }
       />
       <datalist id="categorias">
-        {categorys.map((cat) => (
+        {categorys?.map((cat) => (
           <option key={cat.id} value={cat.name} />
         ))}
       </datalist>

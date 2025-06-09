@@ -7,7 +7,8 @@ export const transactionAPI = baseAPI.injectEndpoints({
         url: '/transaction/add',
         method: 'POST',
         body
-      })
+      }),
+      invalidatesTags: ['Historico'] // <- aqui tá certo
     }),
     PutTransaction: builder.mutation<
       Transaction,
@@ -17,13 +18,19 @@ export const transactionAPI = baseAPI.injectEndpoints({
         url: `/transaction/edit/${id}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Historico']
     }),
     DeleteTransaction: builder.mutation<{ detail: string }, number>({
       query: (id) => ({
         url: `/transaction/delete/${id}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Historico']
+    }),
+    GetHistorico: builder.query<Transaction[], void>({
+      query: () => '/transaction',
+      providesTags: ['Historico']
     })
   })
 })
@@ -31,5 +38,6 @@ export const transactionAPI = baseAPI.injectEndpoints({
 export const {
   useDeleteTransactionMutation,
   usePostTransactionMutation,
-  usePutTransactionMutation
+  usePutTransactionMutation,
+  useGetHistoricoQuery
 } = transactionAPI
