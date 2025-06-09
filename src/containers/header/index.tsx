@@ -36,7 +36,6 @@ const Header = ({ page }: props) => {
             <a href="#Funcionalidades">Funcionalidades</a>
           </nav>
         </Container>
-        <hr />
       </HeaderContainer>
       <AsideUser onClose={() => setAsideActive(false)} active={asideActive} />
     </>

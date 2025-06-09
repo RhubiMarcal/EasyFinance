@@ -8,7 +8,8 @@ export const Colors = {
   brancoEscuro: '#F8FFFD',
   verdeClaro: '#AFCAC2',
   verdeEscuro: '#157C5D',
-  red: '#7C1515'
+  redDark: '#7C1515',
+  red: '#B00020'
 }
 
 export const BreakPoint = {

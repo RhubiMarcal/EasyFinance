@@ -17,6 +17,14 @@ export const HeaderContainer = styled.header<Props>`
     z-index: 2;
   `}
 
+  ${({ page }) =>
+    page === 'MainPage' &&
+    `
+    position: relative;
+    z-index: 2;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  `}
+
   > div {
     display: flex;
     align-items: center;

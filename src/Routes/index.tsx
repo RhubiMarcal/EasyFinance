@@ -8,14 +8,7 @@ import Limites from '../pages/limite'
 const Routes = () => (
   <RouteList>
     <Route path="/" element={<LandingPage />} />
-    <Route
-      path="/MainPage"
-      element={
-        <ProtectedRoute loader="padrao">
-          <MainPage />
-        </ProtectedRoute>
-      }
-    />
+    <Route path="/MainPage" element={<MainPage />} />
     <Route
       path="/Historico"
       element={

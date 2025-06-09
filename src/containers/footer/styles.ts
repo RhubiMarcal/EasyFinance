@@ -7,6 +7,9 @@ export const FooterContainer = styled.footer<{ startNow?: boolean }>`
   bottom: 0;
   left: 0;
   width: 100vw;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
   > div {
     &:first-child {
       display: ${({ startNow }) => (startNow ? 'flex' : 'none')};
