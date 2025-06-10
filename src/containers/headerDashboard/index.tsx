@@ -10,8 +10,8 @@ import filtrar from '../../assets/img/filtrar.png'
 type Props = {
   name: 'Histórico' | 'Limites' | 'Metas'
   onAdd?: () => void
-  onFilter: (activeFilter: boolean) => void
-  navFilter: JSX.Element
+  onFilter?: (activeFilter: boolean) => void
+  navFilter?: JSX.Element
 }
 
 const HeaderDashboard = ({ name, navFilter, onFilter, onAdd }: Props) => {
@@ -19,7 +19,9 @@ const HeaderDashboard = ({ name, navFilter, onFilter, onAdd }: Props) => {
   const [activeFilter, setActiveFilter] = useState(false)
 
   useEffect(() => {
-    onFilter(activeFilter)
+    if (onFilter) {
+      onFilter(activeFilter)
+    }
   }, [activeFilter, onFilter])
   return (
     <HeaderDashboardContainer activeFilter={activeFilter}>

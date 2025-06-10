@@ -29,14 +29,29 @@ export const filtrarTransacoesDoMes = (
   )
 }
 
+export const filtrarPorCategoria = (
+  categoria: string,
+  historicoData: Transaction[]
+): Transaction[] => {
+  return historicoData?.filter((t) => t.category === categoria) || []
+}
+
 export const somarValoresTransacoes = (transacoes: Transaction[]): number => {
   return transacoes.reduce((acc, t) => acc + t.value, 0)
 }
 
 export const calcPercent = (
-  item: LimitReq,
+  value: number,
   totalCategoriaMes: number
 ): number => {
-  const percent = (totalCategoriaMes / item.value) * 100
+  const percent = (totalCategoriaMes / value) * 100
   return Math.round(percent)
+}
+
+export const getTotalGastoMes = (
+  transacoes: Transaction[],
+  categoria: string
+): number => {
+  const list = filtrarTransacoesDoMes(categoria, transacoes)
+  return somarValoresTransacoes(list)
 }

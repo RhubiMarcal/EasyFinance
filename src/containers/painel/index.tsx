@@ -1,4 +1,3 @@
-import { Container } from '../../styles'
 import { PainelContainer } from './styles'
 import painel1 from '../../assets/img/painel1.png'
 import painel2 from '../../assets/img/painel2.png'
@@ -44,24 +43,19 @@ const allButtons = [
 
 const Painel = () => (
   <PainelContainer>
-    <Container>
-      <h2>Painel Principal</h2>
-      <div>
-        {allButtons.map((b, index) => (
-          <BoxMainPage type="painel" key={index}>
-            <>
-              <h2>{b.title}</h2>
-              <div className="row">
-                <img src={b.img} alt={b.button.text} />
-                <Button color="green" type="Link" href={b.button.link}>
-                  <>{b.button.text}</>
-                </Button>
-              </div>
-            </>
-          </BoxMainPage>
-        ))}
-      </div>
-    </Container>
+    {allButtons.map((b, index) => (
+      <BoxMainPage type="painel" key={index}>
+        <>
+          <h2>{b.title}</h2>
+          <div className="row">
+            <img src={b.img} alt={b.button.text} />
+            <Button color="green" type="Link" href={b.button.link}>
+              <>{b.button.text}</>
+            </Button>
+          </div>
+        </>
+      </BoxMainPage>
+    ))}
   </PainelContainer>
 )
 export default Painel

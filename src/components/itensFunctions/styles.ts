@@ -110,7 +110,34 @@ export const ContainerItenLimite = styled.li`
   }
 `
 
-export const ContainerItenMetas = styled.li``
+export const ContainerItenMetas = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  background-color: ${Colors.cinzaClaro};
+  border-radius: 25px;
+  padding: 22px;
+  position: relative;
+
+  > div:first-child {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    > div {
+      > p {
+        font-size: 48px;
+        font-family: ${Fonts.Jomhuria};
+      }
+    }
+  }
+`
 
 export const ButtonEdit = styled.button`
   position: absolute;

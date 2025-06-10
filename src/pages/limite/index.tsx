@@ -8,7 +8,7 @@ import {
 } from '../../service/Hooks/limitAPI'
 import { MainDashboard } from '../../styles'
 import Loader from '../../components/Loader'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Filter, { Filters } from '../../components/Filter'
 import Footer from '../../containers/footer'
 import Button from '../../components/Button'
@@ -27,7 +27,6 @@ const Limites = () => {
     refetch
   } = useGetLimitsQuery()
   const { data: categorys, isLoading: loadingCategory } = useGetCategorysQuery()
-  const location = useLocation()
 
   const [formActive, setFormActive] = useState<'add' | 'edit'>()
   const [error, setError] = useState('')
@@ -46,14 +45,6 @@ const Limites = () => {
   const [putLimit] = usePutLimitMutation()
   const [deletLimit] = useDeleteLimitMutation()
   const [id, setId] = useState<number>()
-
-  useEffect(() => {
-    const formActiveFromLocation = location.state?.formActive
-    if (formActiveFromLocation === 'add' && formActive !== 'add') {
-      setFormActive('add')
-      window.history.replaceState({}, document.title)
-    }
-  }, [location.state, formActive])
 
   useEffect(() => {
     const aplicarFiltros = () => {
@@ -172,9 +163,7 @@ const Limites = () => {
       </section>
       <FormModel
         onClose={() => handleClose()}
-        title={
-          formActive === 'add' ? 'Adicionar Transação' : 'Editar Transação'
-        }
+        title={formActive === 'add' ? 'Adicionar Limite' : 'Editar Limite'}
         isModal
         active={formActive === 'add' || formActive === 'edit'}
         onSubmit={(e) =>

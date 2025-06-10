@@ -3,7 +3,7 @@ import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const WelcomeContainer = styled.section`
   background-color: ${Colors.azulEscuro};
-  padding: 50px 0;
+  padding: 25px 0;
 
   > div {
     display: flex;
@@ -12,19 +12,23 @@ export const WelcomeContainer = styled.section`
 
     > div:first-child {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
-      h1,
-      span {
-        color: ${Colors.brancoEscuro};
-        font-family: ${Fonts.Jomhuria};
-        font-weight: lighter;
-        font-size: 72px;
-      }
-      span {
-        color: ${Colors.verdeEscuro};
-        text-transform: capitalize;
+      gap: 16px;
+      h1 {
+        display: flex;
+        flex-direction: column;
+
+        p {
+          color: ${Colors.brancoEscuro};
+          font-family: ${Fonts.Jomhuria};
+          font-size: 48px;
+          font-weight: lighter;
+        }
+        span {
+          color: ${Colors.cinzaClaro};
+          font-size: 18px;
+        }
       }
       img {
         width: 90px;
@@ -41,6 +45,11 @@ export const WelcomeContainer = styled.section`
           }
         }
       }
+    }
+    > div:last-child {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
   }
 `

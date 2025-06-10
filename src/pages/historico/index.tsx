@@ -56,6 +56,7 @@ const Historico = () => {
   const [date, setDate] = useState('')
   const [id, setId] = useState<number>()
   const [erro, setErro] = useState('')
+  const [metaId, setMetaId] = useState(0)
 
   const [filters, setFilters] = useState<Filters>({
     categoria: '',
@@ -101,7 +102,13 @@ const Historico = () => {
         await refetchCategorias()
       }
 
-      const tran: TransactionReq = { category, date, type, value }
+      const tran: TransactionReq = {
+        category,
+        date,
+        type,
+        value,
+        goal_id: metaId
+      }
       await postTransaction(tran).unwrap()
       await refetchHistorico()
 
@@ -224,12 +231,15 @@ const Historico = () => {
   }, [transactions, filtersActive, filters])
 
   useEffect(() => {
-    const formActiveFromLocation = location.state?.formActive
-    if (formActiveFromLocation === 'add' && formActive !== 'add') {
-      setFormActive('add')
-      window.history.replaceState({}, document.title)
+    const inicializaForm = () => {
+      const formActiveFromLocation = location.state?.formActive
+      if (formActiveFromLocation === 'add') {
+        setFormActive('add')
+        window.history.replaceState({}, document.title)
+      }
     }
-  }, [location.state, formActive])
+    inicializaForm()
+  }, [location.state?.formActive])
 
   return (
     <MainDashboard>
@@ -273,7 +283,10 @@ const Historico = () => {
           <div className="inputDiv">
             <label htmlFor="categorias">Categorias: </label>
             <SelectCategorias
-              onChange={(v) => setCategory(v)}
+              onChange={(v, id) => {
+                setCategory(v)
+                setMetaId(id ? id : 0)
+              }}
               value={category}
             />
           </div>

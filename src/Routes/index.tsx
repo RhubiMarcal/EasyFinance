@@ -4,13 +4,21 @@ import MainPage from '../pages/MainPage'
 import ProtectedRoute from './protectedRoute'
 import Historico from '../pages/historico'
 import Limites from '../pages/limite'
+import Goals from '../pages/Goal'
 
 const Routes = () => (
   <RouteList>
     <Route path="/" element={<LandingPage />} />
-    <Route path="/MainPage" element={<MainPage />} />
     <Route
-      path="/Historico"
+      path="/mainPage"
+      element={
+        <ProtectedRoute loader="padrao">
+          <MainPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/historico"
       element={
         <ProtectedRoute loader="historico">
           <Historico />
@@ -18,10 +26,18 @@ const Routes = () => (
       }
     />
     <Route
-      path="/Limites"
+      path="/limites"
       element={
         <ProtectedRoute loader="limit">
           <Limites />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/metas"
+      element={
+        <ProtectedRoute loader="meta">
+          <Goals />
         </ProtectedRoute>
       }
     />

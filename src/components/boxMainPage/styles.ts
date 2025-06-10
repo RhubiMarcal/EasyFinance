@@ -41,6 +41,15 @@ export const BoxMainPageContainer = styled.div<{ type: 'hero' | 'painel' }>`
       align-items: center;
     }
 
+    .col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      gap: 16px;
+      align-items: center;
+    }
+
     img {
       width: ${({ type }) => (type == 'painel' ? '30%' : '250px')};
     }

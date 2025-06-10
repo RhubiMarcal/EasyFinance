@@ -5,33 +5,43 @@ import { useGetMeQuery } from '../../service/Hooks/userAPI'
 import Loader from '../../components/Loader'
 import Carteira from '../../assets/img/carteira.png'
 import BoxMainPage from '../../components/boxMainPage'
-import Warning from '../../components/Warning'
 import Button from '../../components/Button'
+import { useNavigate } from 'react-router-dom'
+import Painel from '../painel'
 
 const Welcome = () => {
   const { data: userData, isLoading } = useGetMeQuery()
+  const navigate = useNavigate()
 
   return (
     <>
       <WelcomeContainer>
         <Container>
           <div>
-            <h1>
-              Olá (a) <span>{userData?.name}</span>
-            </h1>
             <img src={dollar} alt="dollar" />
+            <h1>
+              <p>Olá {userData?.name}</p>
+              <span>É bom te ter de volta.</span>
+            </h1>
           </div>
           <BoxMainPage type="hero">
             <>
-              <div className="boasVindas">
+              <img src={Carteira} alt="" />
+              <div className="col">
                 <h2>Boas-Vindas a Sua Central Financeira</h2>
-                <Button color="green" type="button">
+                <Button
+                  onClick={() =>
+                    navigate('/Historico', { state: { formActive: 'add' } })
+                  }
+                  color="green"
+                  type="button"
+                >
                   <>Adicionar Transação</>
                 </Button>
               </div>
             </>
           </BoxMainPage>
-          <Warning />
+          <Painel />
         </Container>
         <Loader active={isLoading} type="padrao" />
       </WelcomeContainer>

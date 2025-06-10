@@ -25,7 +25,7 @@ declare type Transaction = {
   value: number
   date: string
   category: string
-  isMeta?: boolean
+  goal_id?: number
 }
 
 declare type TransactionReq = {
@@ -33,7 +33,7 @@ declare type TransactionReq = {
   value: number
   date: string
   category: string
-  isMeta?: boolean
+  goal_id?: number
 }
 
 declare type Goal = {
@@ -48,7 +48,6 @@ declare type GoalReq = {
   name: string
   GoalValue: number
   CurrentValue: number
-  historico: Transaction[]
 }
 
 declare type Limit = {

@@ -3,10 +3,12 @@ import imgGanho from '../../assets/img/icone de ganho.png'
 import imgGasto from '../../assets/img/icone de gasto.png'
 import editIcon from '../../assets/img/editar.png'
 import imgLimit from '../../assets/img/LimitEdit.png'
+import imgGoal from '../../assets/img/iconeMeta.png'
 import { useGetHistoricoQuery } from '../../service/Hooks/userAPI'
 import ProgressBar from '../ProgressBar'
 import Button from '../Button'
 import Loader from '../Loader'
+import { calcPercent, getTotalGastoMes, parseToBrl } from '../../utils/utils'
 
 type Props = {
   name: 'Histórico' | 'Limites' | 'Metas'
@@ -15,39 +17,8 @@ type Props = {
 }
 
 export const ItensFunctions = ({ item, name, onEdit }: Props) => {
-  const parseToBrl = (price = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
-  }
-
   const { data: historicoData, isLoading: loadingHistorico } =
     useGetHistoricoQuery()
-
-  const getTotalGastoMes = (categoria: string): number => {
-    const agora = new Date()
-    const mesAtual = agora.getMonth()
-    const anoAtual = agora.getFullYear()
-
-    const gastosMes =
-      historicoData?.filter((t) => {
-        const data = new Date(t.date)
-        return (
-          t.category === categoria &&
-          data.getMonth() === mesAtual &&
-          data.getFullYear() === anoAtual
-        )
-      }) || []
-
-    return gastosMes.reduce((acc, t) => acc + t.value, 0)
-  }
-
-  const calcPercent = (item: LimitReq): number => {
-    const totalCategoriaMes = getTotalGastoMes(item.category)
-    const percent = (totalCategoriaMes / item.value) * 100
-    return Math.round(percent)
-  }
 
   function isTransaction(
     item: Transaction | Goal | Limit
@@ -59,14 +30,18 @@ export const ItensFunctions = ({ item, name, onEdit }: Props) => {
     return (item as Limit).category !== undefined
   }
 
+  function isGoal(item: Transaction | Goal | Limit): item is Goal {
+    return (item as Goal).GoalValue !== undefined
+  }
+
   if (name == 'Histórico' && isTransaction(item))
     return (
       <S.ContainerItenHistorico>
         <img src={item.type == 'ganho' ? imgGanho : imgGasto} alt={item.type} />
         <div>
           <p>{parseToBrl(item.value)}</p>
-          {item.isMeta ? (
-            <b>Categoria: Meta</b>
+          {item.goal_id ? (
+            <b>{item.category}</b>
           ) : (
             <b>Categoria: {item.category}</b>
           )}
@@ -85,13 +60,24 @@ export const ItensFunctions = ({ item, name, onEdit }: Props) => {
           <div>
             <p>{item.category}</p>
             <p>
-              {parseToBrl(getTotalGastoMes(item.category)) +
+              {parseToBrl(
+                getTotalGastoMes(
+                  historicoData ? historicoData : [],
+                  item.category
+                )
+              ) +
                 ' / ' +
                 parseToBrl(item.value)}
             </p>
           </div>
         </div>
-        <ProgressBar color="green" progress={calcPercent(item)} />
+        <ProgressBar
+          color="green"
+          progress={calcPercent(
+            item.value,
+            getTotalGastoMes(historicoData ? historicoData : [], item.category)
+          )}
+        />
         <Button color="green" type="button">
           <>Visualizar</>
         </Button>
@@ -101,5 +87,26 @@ export const ItensFunctions = ({ item, name, onEdit }: Props) => {
         <Loader active={loadingHistorico} type="limit" />
       </S.ContainerItenLimite>
     )
-  return <S.ContainerItenMetas></S.ContainerItenMetas>
+  if (name == 'Metas' && isGoal(item))
+    return (
+      <S.ContainerItenMetas>
+        <div>
+          <img src={imgGoal} alt="" />
+          <div>
+            <p>{item.name}</p>
+            <p>
+              {parseToBrl(item.CurrentValue) +
+                ' / ' +
+                parseToBrl(item.GoalValue)}
+            </p>
+          </div>
+        </div>
+        <ProgressBar
+          color="green"
+          progress={calcPercent(item.GoalValue, item.CurrentValue)}
+        />
+      </S.ContainerItenMetas>
+    )
+
+  return <></>
 }
