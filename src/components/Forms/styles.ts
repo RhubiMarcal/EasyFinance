@@ -78,5 +78,10 @@ export const Overlay = styled.div<{ active: boolean }>`
     form {
       width: 80%;
     }
+
+    .Close {
+      right: 30px;
+      line-height: 22px;
+    }
   }
 `

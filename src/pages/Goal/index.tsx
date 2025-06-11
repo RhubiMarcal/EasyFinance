@@ -1,15 +1,15 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Footer from '../../containers/footer'
 import Header from '../../containers/header'
 import HeaderDashboard from '../../containers/headerDashboard'
 import ListDashboard from '../../containers/listDashboard'
-import { useGetCategorysQuery } from '../../service/Hooks/categoryAPI'
 import * as api from '../../service/Hooks/GoalAPI'
 import { MainDashboard } from '../../styles'
 import Button from '../../components/Button'
 import Error from '../../components/Error'
 import FormModel from '../../components/Forms'
 import InputMoeda from '../../components/InputMoeda'
+import Loader from '../../components/Loader'
 
 const Goals = () => {
   const {
@@ -17,21 +17,22 @@ const Goals = () => {
     isLoading: loadingGoals,
     refetch
   } = api.useGetGoalsQuery()
-  const { data: categorys, isLoading: loadingCategory } = useGetCategorysQuery()
-  const [postGoal] = api.usePostGoalMutation()
-  const [putGoal] = api.usePutGoalMutation()
-  const [deletGoal] = api.useDeleteGoalMutation()
+  const [postGoal, { isLoading: loadingPostGoal }] = api.usePostGoalMutation()
+  const [putGoal, { isLoading: loadingPutGoal }] = api.usePutGoalMutation()
+  const [deletGoal, { isLoading: loadingDeletGoal }] =
+    api.useDeleteGoalMutation()
 
   const [formActive, setFormActive] = useState<'add' | 'edit'>()
   const [error, setError] = useState('')
   const [name, setName] = useState('')
   const [goalValue, setGoalValue] = useState(0)
-  const [currentValue, setCurrentValue] = useState(0)
   const [id, setId] = useState<number>()
+
+  const isLoading =
+    loadingGoals || loadingPostGoal || loadingPutGoal || loadingDeletGoal
 
   const handleEdit = (item: Goal) => {
     setGoalValue(item.GoalValue)
-    setCurrentValue(item.CurrentValue)
     setName(item.name)
     setId(item.id)
     setFormActive('edit')
@@ -53,7 +54,19 @@ const Goals = () => {
       await refetch()
       handleClose()
     } catch (err) {
-      setError('Erro ao adicionar: ' + err)
+      let msg = 'Erro ao adicionar: '
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 
@@ -68,12 +81,27 @@ const Goals = () => {
     }
     try {
       if (id) {
-        await putGoal({ newName: name, id }).unwrap()
+        await putGoal({
+          id,
+          data: { newGoal: goalValue, newName: name }
+        }).unwrap()
         await refetch()
         handleClose()
       }
     } catch (err) {
-      setError('Erro ao enviar formulário: ' + err)
+      let msg = 'Erro ao adicionar: '
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 
@@ -87,7 +115,19 @@ const Goals = () => {
         setError('Erro ao acessar o Id, Tente novamente')
       }
     } catch (err) {
-      setError('Erro ao deletar: ' + err)
+      let msg = 'Erro ao adicionar: '
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 
@@ -95,7 +135,6 @@ const Goals = () => {
     setFormActive(undefined)
     setError('')
     setGoalValue(0)
-    setCurrentValue(0)
     setName('')
     setId(undefined)
   }
@@ -157,6 +196,7 @@ const Goals = () => {
         </>
       </FormModel>
       <Footer />
+      <Loader active={isLoading} type="meta" />
     </MainDashboard>
   )
 }

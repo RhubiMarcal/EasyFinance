@@ -9,6 +9,13 @@ export const limitAPI = baseAPI.injectEndpoints({
       }),
       providesTags: ['Limit']
     }),
+    GetLimitById: builder.query<Limit, number>({
+      query: (id) => ({
+        url: `/limit/get/${id}`,
+        method: 'GET'
+      }),
+      providesTags: ['Limit']
+    }),
     PostLimit: builder.mutation<Limit, LimitReq>({
       query: (body) => ({
         url: '/limit/add',
@@ -39,5 +46,6 @@ export const {
   useDeleteLimitMutation,
   useGetLimitsQuery,
   usePostLimitMutation,
-  usePutLimitMutation
+  usePutLimitMutation,
+  useGetLimitByIdQuery
 } = limitAPI

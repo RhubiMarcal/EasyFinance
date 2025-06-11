@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Header from '../../containers/header'
 import Footer from '../../containers/footer'
@@ -25,6 +25,7 @@ import {
 } from '../../service/Hooks/transactionAPI'
 
 import { MainDashboard } from '../../styles'
+import { useGetGoalsQuery } from '../../service/Hooks/GoalAPI'
 
 type TransactionType = 'gasto' | 'ganho'
 
@@ -34,13 +35,10 @@ const Historico = () => {
     isLoading: loadingHistorico,
     refetch: refetchHistorico
   } = useGetHistoricoQuery()
-  const {
-    data: categorys,
-    isLoading: loadingCategorias,
-    refetch: refetchCategorias
-  } = useGetCategorysQuery()
-  const [postCategory, { isLoading: loadingCategoria }] =
-    usePostCategoryMutation()
+  const { data: categorys, isLoading: loadingCategorias } =
+    useGetCategorysQuery()
+  const { data: Goals, isLoading: loadingGoals } = useGetGoalsQuery()
+  usePostCategoryMutation()
   const [postTransaction, { isLoading: loadingTransaction }] =
     usePostTransactionMutation()
   const [putTransaction, { isLoading: loadingEditTransaction }] =
@@ -70,14 +68,19 @@ const Historico = () => {
 
   const isLoading =
     loadingHistorico ||
-    loadingCategoria ||
     loadingTransaction ||
     loadingEditTransaction ||
     loadingDeletTransaction ||
-    loadingCategorias
+    loadingCategorias ||
+    loadingGoals
 
-  const capitalize = (str: string) =>
-    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  const labelToGoalId = useMemo(() => {
+    const map: Record<string, number> = {}
+    Goals?.forEach((goal) => {
+      map['Meta: ' + goal.name] = goal.id
+    })
+    return map
+  }, [Goals])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -86,35 +89,31 @@ const Historico = () => {
       return
     }
     try {
-      let categoriaExiste
-      if (categorys) {
-        categoriaExiste = categorys.some(
-          (c) => c.name.toLowerCase() === category.toLowerCase()
-        )
-      }
-
-      const nomeFormatado = capitalize(category)
-
-      if (!categoriaExiste) {
-        await postCategory({
-          name: nomeFormatado
-        }).unwrap()
-        await refetchCategorias()
-      }
-
       const tran: TransactionReq = {
         category,
         date,
         type,
         value,
-        goal_id: metaId
+        ...(metaId !== 0 && { goal_id: metaId })
       }
       await postTransaction(tran).unwrap()
       await refetchHistorico()
 
       handleClose()
-    } catch (err) {
-      setErro('Erro ao adicionar: ' + err)
+    } catch (err: unknown) {
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setErro(msg)
     }
   }
 
@@ -124,6 +123,10 @@ const Historico = () => {
     setType(item.type)
     setValue(item.value)
     setId(item.id)
+
+    const idMeta = labelToGoalId[item.category] ?? 0
+    setMetaId(idMeta)
+
     setFormActive('edit')
   }
 
@@ -137,24 +140,14 @@ const Historico = () => {
       return
     }
     try {
-      let categoriaExiste
-      if (categorys) {
-        categoriaExiste = categorys.some(
-          (c) => c.name.toLowerCase() === category.toLowerCase()
-        )
-      }
-
-      const nomeFormatado = capitalize(category)
-
-      if (!categoriaExiste) {
-        await postCategory({
-          name: nomeFormatado
-        }).unwrap()
-        await refetchCategorias()
-      }
-
       if (id) {
-        const tran: TransactionReq = { category, date, type, value }
+        const tran: TransactionReq = {
+          category,
+          date,
+          type,
+          value,
+          ...(metaId !== 0 && { goal_id: metaId })
+        }
         await putTransaction({
           data: tran,
           id
@@ -164,7 +157,19 @@ const Historico = () => {
         handleClose()
       }
     } catch (err) {
-      setErro('Erro ao enviar formulário: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setErro(msg)
     }
   }
 
@@ -178,7 +183,19 @@ const Historico = () => {
         setErro('Erro ao acessar o Id, Tente novamente')
       }
     } catch (err) {
-      setErro('Erro ao deletar: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setErro(msg)
     }
   }
 
@@ -241,6 +258,14 @@ const Historico = () => {
     inicializaForm()
   }, [location.state?.formActive])
 
+  useEffect(() => {
+    if (category && labelToGoalId[category]) {
+      setMetaId(labelToGoalId[category])
+    } else {
+      setMetaId(0)
+    }
+  }, [category, labelToGoalId])
+
   return (
     <MainDashboard>
       <Header page="MainPage" />
@@ -285,7 +310,7 @@ const Historico = () => {
             <SelectCategorias
               onChange={(v, id) => {
                 setCategory(v)
-                setMetaId(id ? id : 0)
+                setMetaId(id ?? 0)
               }}
               value={category}
             />

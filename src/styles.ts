@@ -14,7 +14,7 @@ export const Colors = {
 
 export const BreakPoint = {
   tablet: '1050px',
-  mobile: '684px'
+  mobile: '690px'
 }
 
 export const Fonts = {

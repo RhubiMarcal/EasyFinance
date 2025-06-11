@@ -25,7 +25,7 @@ export const ProgressBarContainer = styled.div<Props>`
   p {
     color: ${Colors.brancoEscuro};
     position: absolute;
-    right: 3px;
+    ${({ color }) => (color === 'darkBlue' ? 'left: 6px;' : 'right: 4px;')}
     font-size: 22px;
   }
 `

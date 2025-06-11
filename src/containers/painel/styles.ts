@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors, Fonts } from '../../styles'
+import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const PainelContainer = styled.section`
   background-color: ${Colors.azulEscuro};
@@ -12,5 +12,8 @@ export const PainelContainer = styled.section`
     font-size: 48px;
     font-family: ${Fonts.Jomhuria};
     font-weight: lighter;
+  }
+  @media (max-width: ${BreakPoint.mobile}) {
+    grid-template-columns: 1fr;
   }
 `

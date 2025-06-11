@@ -90,7 +90,19 @@ const Limites = () => {
       await refetch()
       handleClose()
     } catch (err) {
-      setError('Erro ao adicionar: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 
@@ -111,7 +123,19 @@ const Limites = () => {
         handleClose()
       }
     } catch (err) {
-      setError('Erro ao enviar formulário: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 
@@ -125,7 +149,19 @@ const Limites = () => {
         setError('Erro ao acessar o Id, Tente novamente')
       }
     } catch (err) {
-      setError('Erro ao deletar: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setError(msg)
     }
   }
 

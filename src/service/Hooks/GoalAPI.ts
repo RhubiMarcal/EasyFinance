@@ -17,10 +17,11 @@ export const goalAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: ['Goal']
     }),
-    PutGoal: builder.mutation<Goal, { id: number; newName: string }>({
-      query: ({ id, newName }) => ({
-        url: `/goal/edit/${id}?newName=${encodeURIComponent(newName)}`,
-        method: 'PUT'
+    PutGoal: builder.mutation<Goal, { id: number; data: GoalReqEdit }>({
+      query: ({ id, data }) => ({
+        url: `/goal/edit/${id}`,
+        method: 'PUT',
+        body: data
       }),
       invalidatesTags: ['Goal']
     }),

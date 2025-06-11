@@ -21,6 +21,10 @@ export const HeaderDashboardContainer = styled.div<{ activeFilter: boolean }>`
       gap: 10px;
       align-items: center;
       margin-bottom: 10px;
+
+      &:last-child {
+        margin-top: 20px;
+      }
     }
     img {
       width: 20px;

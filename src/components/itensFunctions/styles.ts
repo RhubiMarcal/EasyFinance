@@ -137,6 +137,14 @@ export const ContainerItenMetas = styled.li`
       }
     }
   }
+  @media (max-width: ${BreakPoint.mobile}) {
+    padding-bottom: 80px;
+    > button:first-of-type {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+  }
 `
 
 export const ButtonEdit = styled.button`

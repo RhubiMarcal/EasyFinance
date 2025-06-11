@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Colors, Fonts } from '../../styles'
+import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const BoxMainPageContainer = styled.div<{ type: 'hero' | 'painel' }>`
   background-color: ${Colors.brancoEscuro};
@@ -8,9 +8,7 @@ export const BoxMainPageContainer = styled.div<{ type: 'hero' | 'painel' }>`
 
   > div {
     background-color: ${Colors.brancoEscuro};
-    border: 5px solid
-      ${({ type }) =>
-        type == 'painel' ? Colors.verdeEscuro : Colors.azulEscuro};
+    border: 5px solid ${Colors.azulEscuro};
     border-radius: 55px;
     padding: 10px 53px;
     display: flex;
@@ -52,6 +50,20 @@ export const BoxMainPageContainer = styled.div<{ type: 'hero' | 'painel' }>`
 
     img {
       width: ${({ type }) => (type == 'painel' ? '30%' : '250px')};
+    }
+  }
+  @media (max-width: ${BreakPoint.mobile}) {
+    > div {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      h2 {
+        text-align: center;
+      }
+      img {
+        width: ${({ type }) => (type == 'painel' ? '30%' : '100px')};
+        ${({ type }) => type == 'painel' && 'display: none;'}
+      }
     }
   }
 `

@@ -16,8 +16,10 @@ const SelectCategorias = ({ value, onChange }: Props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = e.target.value
-    const goalId = labelToGoalId[label]
-    onChange(label, goalId)
+    const goalId = labelToGoalId[label] ?? 0
+    const categoryId = labelToCategoryId[label] ?? 0
+
+    onChange(label, goalId || categoryId || 0)
   }
 
   const labelToGoalId = useMemo(() => {
@@ -27,6 +29,14 @@ const SelectCategorias = ({ value, onChange }: Props) => {
     })
     return map
   }, [Goals])
+
+  const labelToCategoryId = useMemo(() => {
+    const map: Record<string, number> = {}
+    categorys?.forEach((cat) => {
+      map[cat.name] = cat.id
+    })
+    return map
+  }, [categorys])
 
   return (
     <>

@@ -8,7 +8,6 @@ export const parseToBrl = (price = 0) => {
 }
 
 export const filtrarTransacoesDoMes = (
-  categoria: string,
   historicoData: Transaction[]
 ): Transaction[] => {
   const agora = new Date()
@@ -20,7 +19,6 @@ export const filtrarTransacoesDoMes = (
       const [ano, mes, dia] = t.date.split('-').map(Number)
       const data = new Date(ano, mes - 1, dia)
       return (
-        t.category === categoria &&
         t.type === 'gasto' &&
         data.getMonth() === mesAtual &&
         data.getFullYear() === anoAtual
@@ -48,10 +46,17 @@ export const calcPercent = (
   return Math.round(percent)
 }
 
-export const getTotalGastoMes = (
-  transacoes: Transaction[],
-  categoria: string
-): number => {
-  const list = filtrarTransacoesDoMes(categoria, transacoes)
+export const getTotalGastoMes = (transacoes: Transaction[]): number => {
+  const list = filtrarTransacoesDoMes(transacoes)
   return somarValoresTransacoes(list)
+}
+
+export function getCategoryIdByName(
+  categories: Category[],
+  name: string
+): number | null {
+  const category = categories.find(
+    (cat) => cat.name.toLowerCase() === name.toLowerCase()
+  )
+  return category ? category.id : null
 }

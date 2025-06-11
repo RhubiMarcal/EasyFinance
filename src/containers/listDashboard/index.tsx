@@ -5,7 +5,7 @@ import { Container } from '../../styles'
 type Props<T extends Transaction | Goal | Limit> = {
   name: 'Histórico' | 'Limites' | 'Metas'
   itenList: T[]
-  onEdit: (item: T) => void
+  onEdit?: (item: T) => void
 }
 
 const ListDashboard = <T extends Transaction | Goal | Limit>({
@@ -28,7 +28,7 @@ const ListDashboard = <T extends Transaction | Goal | Limit>({
       <ListItenDashboard page={name}>
         {sortedList.map((item) => (
           <ItensFunctions
-            onEdit={() => onEdit(item)}
+            {...(onEdit && { onEdit: () => onEdit(item) })}
             item={item}
             name={name}
             key={item.id}

@@ -47,7 +47,19 @@ const Hero = () => {
       setErro('')
       navigator('/mainPage')
     } catch (err) {
-      setErro('Erro ao logar: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setErro(msg)
     }
   }
 
@@ -62,7 +74,19 @@ const Hero = () => {
       setErro('')
       navigator('/mainPage')
     } catch (err) {
-      setErro('Erro ao cadastrar: ' + err)
+      let msg = 'Erro ao adicionar.'
+
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'data' in err &&
+        typeof (err as { data?: unknown }).data === 'object' &&
+        (err as { data?: { detail?: string } }).data?.detail
+      ) {
+        msg += ' ' + (err as { data: { detail: string } }).data.detail
+      }
+
+      setErro(msg)
     }
   }
 

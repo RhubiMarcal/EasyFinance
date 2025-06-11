@@ -16,8 +16,19 @@ export const categoryAPI = baseAPI.injectEndpoints({
         body
       }),
       invalidatesTags: ['Categoria']
+    }),
+    GetCategoryHistorico: builder.query<Transaction[], number>({
+      query: (categoryId) => ({
+        url: `/category/${categoryId}/historico`,
+        method: 'GET'
+      }),
+      providesTags: ['Historico']
     })
   })
 })
 
-export const { useGetCategorysQuery, usePostCategoryMutation } = categoryAPI
+export const {
+  useGetCategorysQuery,
+  usePostCategoryMutation,
+  useGetCategoryHistoricoQuery
+} = categoryAPI

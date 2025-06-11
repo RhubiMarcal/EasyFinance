@@ -50,6 +50,11 @@ declare type GoalReq = {
   CurrentValue: number
 }
 
+declare type GoalReqEdit = {
+  newName: string
+  newGoal: number
+}
+
 declare type Limit = {
   id: number
   category: string
@@ -68,4 +73,8 @@ declare type Category = {
 
 declare type CategoryReq = {
   name: string
+}
+
+declare interface ErrorDetail {
+  detail: string
 }

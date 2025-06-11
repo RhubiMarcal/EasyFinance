@@ -92,30 +92,33 @@ const Filter = ({ categorys, onChange, hasCategory, hasDate }: Props) => {
           </label>
 
           <div>
-            <label htmlFor="FilterDateStart">
-              <p>De:</p>{' '}
-            </label>
-            <input
-              type="date"
-              id="FilterDateStart"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              disabled={!useDateFilter}
-              max={today}
-            />
-
-            <label htmlFor="FilterDateEnd">
-              <p>Até:</p>{' '}
-            </label>
-            <input
-              type="date"
-              id="FilterDateEnd"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              disabled={!useDateFilter}
-              max={today}
-              min={startDate || undefined}
-            />
+            <div>
+              <label htmlFor="FilterDateStart">
+                <span>De:</span>{' '}
+              </label>
+              <input
+                type="date"
+                id="FilterDateStart"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                disabled={!useDateFilter}
+                max={today}
+              />
+            </div>
+            <div>
+              <label htmlFor="FilterDateEnd">
+                <span>Até:</span>{' '}
+              </label>
+              <input
+                type="date"
+                id="FilterDateEnd"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                disabled={!useDateFilter}
+                max={today}
+                min={startDate || undefined}
+              />
+            </div>
 
             {isEndBeforeStart && (
               <Error msg="Data final não pode ser antes da inicial." />
