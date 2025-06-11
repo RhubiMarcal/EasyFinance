@@ -15,9 +15,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from 'recharts'
-import { GraficosContainer } from './styles'
+import { GraficosContainer, Scroll } from './styles'
 import BoxMainPage from '../../components/boxMainPage'
 import { useMemo, useState } from 'react'
 
@@ -41,6 +42,7 @@ const Graficos = () => {
     const mes = String(hoje.getMonth() + 1).padStart(2, '0')
     return `${ano}-${mes}`
   })
+
   const [graficoAno, setGraficoAno] = useState(() => {
     const hoje = new Date()
     return String(hoje.getFullYear())
@@ -69,6 +71,20 @@ const Graficos = () => {
       value: t.value
     }))
     .sort((a, b) => b.value - a.value)
+
+  const mesesComTransacoes = useMemo(() => {
+    if (!allHistorico) return []
+
+    const mesesSet = new Set<string>()
+    allHistorico.forEach((t) => {
+      if (t.type == 'gasto') {
+        const mes = t.date.slice(0, 7)
+        mesesSet.add(mes)
+      }
+    })
+
+    return Array.from(mesesSet).sort((a, b) => (a > b ? -1 : 1))
+  }, [allHistorico])
 
   const anoAtual = new Date().getFullYear()
 
@@ -127,73 +143,80 @@ const Graficos = () => {
             <BoxMainPage type="painel">
               <>
                 <h2>Gráfico de Gasto Mensal</h2>
-                <PieChart width={400} height={400}>
-                  <Pie
-                    data={DataPizza}
-                    dataKey="value"
-                    nameKey="category"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={120}
-                    fill="#8884d8"
-                    label={({ name, value }) =>
-                      `${value.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                      })}`
-                    }
-                  >
-                    {DataPizza.map((entry, index) => (
-                      <Cell
-                        key={`cell-${entry.category}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value: number, name: string) => [
-                      value.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                      }),
-                      name
-                    ]}
-                  />
-                  <Legend />
-                </PieChart>
+                <ResponsiveContainer width="100%" height={400}>
+                  <PieChart>
+                    <Pie
+                      data={DataPizza}
+                      dataKey="value"
+                      nameKey="category"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={120}
+                      fill="#8884d8"
+                      label={({ name, value }) =>
+                        `${value.toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL'
+                        })}`
+                      }
+                    >
+                      {DataPizza.map((entry, index) => (
+                        <Cell
+                          key={`cell-${entry.category}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      formatter={(value: number, name: string) => [
+                        value.toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL'
+                        }),
+                        name
+                      ]}
+                    />
+                    <Legend margin={{ top: 1000 }} />
+                  </PieChart>
+                </ResponsiveContainer>
                 <div className="inputDiv">
                   <label htmlFor="mes">Mês: </label>
-                  <input
+                  <select
                     id="mes"
                     name="mes"
-                    type="month"
-                    min={1999}
-                    max={new Date().getFullYear()}
                     value={pizzaMes}
                     onChange={(e) => setPizzaMes(e.target.value)}
-                  />
+                  >
+                    {mesesComTransacoes.map((mes) => (
+                      <option key={mes} value={mes}>
+                        {mes}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </>
             </BoxMainPage>
             <BoxMainPage type="painel">
               <>
                 <h2>Gráfico Anual</h2>
-                <BarChart
-                  width={1024}
-                  height={300}
-                  data={dataGastoGanho}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                  barCategoryGap="5%"
-                  barGap={5}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="gasto" fill="#B00020" />
-                  <Bar dataKey="ganho" fill="#388E3C" />
-                </BarChart>
+                <Scroll>
+                  <BarChart
+                    width={1024}
+                    height={300}
+                    data={dataGastoGanho}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    barCategoryGap="5%"
+                    barGap={5}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="gasto" fill="#B00020" />
+                    <Bar dataKey="ganho" fill="#388E3C" />
+                  </BarChart>
+                </Scroll>
                 <div className="inputDiv">
                   <label htmlFor="ano">Ano: </label>
                   <select

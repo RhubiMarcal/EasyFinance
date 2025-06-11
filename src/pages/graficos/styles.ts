@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Colors, Fonts } from '../../styles'
+import { BreakPoint, Colors, Fonts } from '../../styles'
 
 export const GraficosContainer = styled.section`
   background-color: ${Colors.azulEscuro};
@@ -58,6 +58,41 @@ export const GraficosContainer = styled.section`
           font-size: 22px;
         }
       }
+    }
+  }
+
+  @media (max-width: ${BreakPoint.tablet}) {
+    > div > div .inputDiv {
+      input,
+      select {
+        border: none;
+        background-color: ${Colors.cinzaClaro};
+        border-radius: 50px;
+        padding: 8px 8px;
+        font-size: 18px;
+      }
+    }
+  }
+`
+
+export const Scroll = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+
+  text-align: left;
+
+  > * {
+    width: 1024px;
+    height: 300px;
+  }
+
+  @media (max-width: ${BreakPoint.mobile}) {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 `
