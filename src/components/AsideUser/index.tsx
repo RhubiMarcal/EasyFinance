@@ -12,6 +12,8 @@ import {
   useGetMeQuery,
   useLogoutMutation
 } from '../../service/Hooks/userAPI'
+import { useDispatch } from 'react-redux'
+import { baseAPI } from '../../service/api'
 
 type Props = {
   active: boolean
@@ -19,6 +21,7 @@ type Props = {
 }
 
 const AsideUser = ({ active, onClose }: Props) => {
+  const dispatch = useDispatch()
   const [editName, setEdtName] = useState(false)
   const [editPassword, setEdtPassword] = useState(false)
   const [newName, setNewName] = useState('')
@@ -70,6 +73,7 @@ const AsideUser = ({ active, onClose }: Props) => {
   const handleLogout = async () => {
     try {
       await logout().unwrap()
+      dispatch(baseAPI.util.resetApiState())
       navigate('/')
     } catch (err) {
       console.error('Erro ao deslogar:', err)

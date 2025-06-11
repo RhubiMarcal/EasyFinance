@@ -6,6 +6,7 @@ import Historico from '../pages/historico'
 import Limites from '../pages/limite'
 import Goals from '../pages/Goal'
 import Details from '../pages/details'
+import Graficos from '../pages/graficos'
 
 const Routes = () => (
   <RouteList>
@@ -55,6 +56,14 @@ const Routes = () => (
       element={
         <ProtectedRoute loader="meta">
           <Details type="Metas" />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/grafico"
+      element={
+        <ProtectedRoute loader="meta">
+          <Graficos />
         </ProtectedRoute>
       }
     />
